@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset Statistics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fff;
+            color: #000;
+            line-height: 1.6;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: 2px solid #000;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        .meta {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .summary-card {
+            border: 1px solid #000;
+            padding: 20px;
+        }
+
+        .summary-card .value {
+            font-size: 2.5rem;
+            font-weight: 200;
+        }
+
+        .summary-card .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+
+        .dataset {
+            border: 1px solid #000;
+            margin-bottom: 30px;
+        }
+
+        .dataset-header {
+            background: #000;
+            color: #fff;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dataset-header h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .dataset-header .toggle {
+            font-size: 1.5rem;
+            font-weight: 200;
+        }
+
+        .dataset-body {
+            padding: 20px;
+            display: none;
+        }
+
+        .dataset.open .dataset-body {
+            display: block;
+        }
+
+        .dataset.open .toggle {
+            transform: rotate(45deg);
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            padding: 15px;
+            background: #f9f9f9;
+        }
+
+        .stat .value {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .stat .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+        }
+
+        .time-info {
+            background: #f5f5f5;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 3px solid #000;
+        }
+
+        .time-info h4 {
+            font-weight: 500;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+        }
+
+        .time-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .time-item .label {
+            font-size: 0.7rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .time-item .value {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .columns-section {
+            margin-top: 20px;
+        }
+
+        .columns-section h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .column-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .column-tag {
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-family: 'Consolas', monospace;
+        }
+
+        .column-tag.datetime {
+            border-color: #000;
+            background: #000;
+            color: #fff;
+        }
+
+        .column-tag.metadata {
+            border-color: #666;
+            background: #666;
+            color: #fff;
+        }
+
+        .column-tag.numeric {
+            background: #f0f0f0;
+        }
+
+        .file-section {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .file-section:first-child {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .file-name {
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            padding: 8px;
+            background: #f9f9f9;
+        }
+
+        .bar-chart {
+            margin: 20px 0;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .bar-label {
+            width: 200px;
+            font-size: 0.75rem;
+            font-family: 'Consolas', monospace;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .bar-container {
+            flex: 1;
+            height: 20px;
+            background: #f0f0f0;
+            margin: 0 10px;
+        }
+
+        .bar {
+            height: 100%;
+            background: #000;
+            transition: width 0.3s ease;
+        }
+
+        .bar-value {
+            width: 80px;
+            font-size: 0.75rem;
+            text-align: right;
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+        }
+
+        .legend-color.datetime { background: #000; }
+        .legend-color.metadata { background: #666; }
+        .legend-color.numeric { background: #f0f0f0; border: 1px solid #ccc; }
+        .legend-color.other { background: #fff; border: 1px solid #ccc; }
+
+        .null-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+
+        .null-indicator.good { background: #000; }
+        .null-indicator.warning { background: #999; }
+        .null-indicator.bad { background: #ddd; }
+
+        .loading {
+            text-align: center;
+            padding: 100px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .error {
+            background: #f5f5f5;
+            padding: 20px;
+            border-left: 3px solid #999;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .bar-label {
+                width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dataset Statistics</h1>
+        <p class="meta">Generated: <span id="generated-at">-</span></p>
+    </header>
+
+    <div class="summary-grid" id="summary-grid"></div>
+
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color datetime"></div>
+            <span>Datetime column</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color metadata"></div>
+            <span>Metadata column</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color numeric"></div>
+            <span>Numeric column</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color other"></div>
+            <span>Other</span>
+        </div>
+    </div>
+
+    <div id="datasets-container">
+        <div class="loading">Loading data...</div>
+    </div>
+
+    <script>
+        function formatNumber(num) {
+            if (num === null || num === undefined) return '-';
+            if (typeof num === 'number') {
+                if (Number.isInteger(num)) {
+                    return num.toLocaleString();
+                }
+                return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
+            }
+            return num;
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '-';
+            return dateStr.split('T')[0];
+        }
+
+        function getColumnClass(colName, datetimeCols, metadataCols, dtype) {
+            if (datetimeCols && datetimeCols.includes(colName)) return 'datetime';
+            if (metadataCols && metadataCols.includes(colName)) return 'metadata';
+            if (dtype && (dtype.includes('int') || dtype.includes('float'))) return 'numeric';
+            return '';
+        }
+
+        function renderTimeInfo(timeAnalysis) {
+            if (!timeAnalysis || Object.keys(timeAnalysis).length === 0) return '';
+            
+            let html = '<div class="time-info"><h4>⏱ Time Series Info</h4><div class="time-grid">';
+            
+            for (const [col, info] of Object.entries(timeAnalysis)) {
+                if (info.min_date) {
+                    html += `
+                        <div class="time-item">
+                            <span class="label">Start Date</span>
+                            <span class="value">${formatDate(info.min_date)}</span>
+                        </div>
+                        <div class="time-item">
+                            <span class="label">End Date</span>
+                            <span class="value">${formatDate(info.max_date)}</span>
+                        </div>
+                        <div class="time-item">
+                            <span class="label">Duration</span>
+                            <span class="value">${formatNumber(info.date_range_days)} days</span>
+                        </div>
+                        <div class="time-item">
+                            <span class="label">Interval</span>
+                            <span class="value">${info.median_interval}</span>
+                        </div>
+                    `;
+                    break;
+                }
+            }
+            
+            html += '</div></div>';
+            return html;
+        }
+
+        function renderColumns(columns, columnDetails, datetimeCols, metadataCols) {
+            let html = '<div class="columns-section"><h4>Columns</h4><div class="column-list">';
+            
+            for (const col of columns) {
+                const details = columnDetails[col];
+                const colClass = getColumnClass(col, datetimeCols, metadataCols, details?.dtype);
+                const nullPct = details?.null_percentage || 0;
+                let nullClass = 'good';
+                if (nullPct > 5) nullClass = 'warning';
+                if (nullPct > 20) nullClass = 'bad';
+                
+                html += `<span class="column-tag ${colClass}" title="${details?.dtype || ''}, ${nullPct}% null">${col}<span class="null-indicator ${nullClass}"></span></span>`;
+            }
+            
+            html += '</div></div>';
+            return html;
+        }
+
+        function renderBarChart(columnDetails, columns) {
+            const numericCols = columns.filter(col => {
+                const dtype = columnDetails[col]?.dtype || '';
+                return dtype.includes('int') || dtype.includes('float');
+            }).slice(0, 10);
+
+            if (numericCols.length === 0) return '';
+
+            const maxVal = Math.max(...numericCols.map(col => Math.abs(columnDetails[col]?.mean || 0)));
+            
+            let html = '<div class="bar-chart"><h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 15px;">Mean Values (Top 10 Numeric)</h4>';
+            
+            for (const col of numericCols) {
+                const mean = columnDetails[col]?.mean || 0;
+                const pct = maxVal > 0 ? (Math.abs(mean) / maxVal * 100) : 0;
+                
+                html += `
+                    <div class="bar-row">
+                        <span class="bar-label" title="${col}">${col}</span>
+                        <div class="bar-container">
+                            <div class="bar" style="width: ${pct}%"></div>
+                        </div>
+                        <span class="bar-value">${formatNumber(mean)}</span>
+                    </div>
+                `;
+            }
+            
+            html += '</div>';
+            return html;
+        }
+
+        function renderFileStats(fileInfo) {
+            if (fileInfo.error) {
+                return `<div class="error">Error: ${fileInfo.error}</div>`;
+            }
+
+            return `
+                <div class="stats-row">
+                    <div class="stat">
+                        <div class="value">${formatNumber(fileInfo.total_rows)}</div>
+                        <div class="label">Rows</div>
+                    </div>
+                    <div class="stat">
+                        <div class="value">${fileInfo.total_columns}</div>
+                        <div class="label">Columns</div>
+                    </div>
+                    <div class="stat">
+                        <div class="value">${fileInfo.memory_usage_mb}</div>
+                        <div class="label">Size (MB)</div>
+                    </div>
+                </div>
+                ${renderTimeInfo(fileInfo.time_analysis)}
+                ${renderColumns(fileInfo.columns, fileInfo.column_details, fileInfo.datetime_columns, fileInfo.potential_metadata_columns)}
+                ${renderBarChart(fileInfo.column_details, fileInfo.columns)}
+            `;
+        }
+
+        function renderDataset(name, data, index) {
+            let content = '';
+            let totalRows = 0;
+            let totalCols = 0;
+            
+            if (data.type === 'folder') {
+                for (const [fileName, fileInfo] of Object.entries(data.files)) {
+                    if (!fileInfo.error) {
+                        totalRows += fileInfo.total_rows || 0;
+                        totalCols = Math.max(totalCols, fileInfo.total_columns || 0);
+                    }
+                    content += `
+                        <div class="file-section">
+                            <div class="file-name">📄 ${fileName}</div>
+                            ${renderFileStats(fileInfo)}
+                        </div>
+                    `;
+                }
+            } else {
+                const fileInfo = data.file_info;
+                if (!fileInfo.error) {
+                    totalRows = fileInfo.total_rows || 0;
+                    totalCols = fileInfo.total_columns || 0;
+                }
+                content = renderFileStats(fileInfo);
+            }
+
+            const typeIcon = data.type === 'folder' ? '📁' : '📄';
+            const filesCount = data.type === 'folder' ? ` (${data.files_count} files)` : '';
+
+            return `
+                <div class="dataset" data-index="${index}">
+                    <div class="dataset-header" onclick="toggleDataset(${index})">
+                        <h2>${typeIcon} ${name}${filesCount}</h2>
+                        <span class="toggle">+</span>
+                    </div>
+                    <div class="dataset-body">
+                        ${content}
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleDataset(index) {
+            const dataset = document.querySelector(`.dataset[data-index="${index}"]`);
+            dataset.classList.toggle('open');
+        }
+
+        function renderSummary(data) {
+            let totalDatasets = Object.keys(data.datasets).length;
+            let totalFiles = 0;
+            let totalRows = 0;
+            let totalSize = 0;
+
+            for (const dataset of Object.values(data.datasets)) {
+                if (dataset.type === 'folder') {
+                    totalFiles += dataset.files_count;
+                    for (const file of Object.values(dataset.files)) {
+                        if (!file.error) {
+                            totalRows += file.total_rows || 0;
+                            totalSize += file.memory_usage_mb || 0;
+                        }
+                    }
+                } else {
+                    totalFiles += 1;
+                    if (!dataset.file_info?.error) {
+                        totalRows += dataset.file_info?.total_rows || 0;
+                        totalSize += dataset.file_info?.memory_usage_mb || 0;
+                    }
+                }
+            }
+
+            return `
+                <div class="summary-card">
+                    <div class="value">${totalDatasets}</div>
+                    <div class="label">Datasets</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">${totalFiles}</div>
+                    <div class="label">Files</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">${formatNumber(totalRows)}</div>
+                    <div class="label">Total Rows</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">${formatNumber(totalSize)}</div>
+                    <div class="label">Size (MB)</div>
+                </div>
+            `;
+        }
+
+        async function loadData() {
+            try {
+                const response = await fetch('datasets_statistics.json');
+                const data = await response.json();
+                
+                document.getElementById('generated-at').textContent = formatDate(data.generated_at) + ' ' + data.generated_at.split('T')[1]?.split('.')[0];
+                document.getElementById('summary-grid').innerHTML = renderSummary(data);
+                
+                let html = '';
+                let index = 0;
+                for (const [name, dataset] of Object.entries(data.datasets)) {
+                    html += renderDataset(name, dataset, index++);
+                }
+                
+                document.getElementById('datasets-container').innerHTML = html;
+                
+                // Auto-open first dataset
+                if (index > 0) {
+                    toggleDataset(0);
+                }
+            } catch (error) {
+                document.getElementById('datasets-container').innerHTML = `
+                    <div class="error">
+                        <strong>Error loading data:</strong> ${error.message}<br><br>
+                        Make sure datasets_statistics.json is in the parent directory.
+                    </div>
+                `;
+            }
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
