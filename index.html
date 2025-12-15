@@ -1054,14 +1054,37 @@
         function toggleDataset(event, element) {
             event.preventDefault();
             event.stopPropagation();
+            
+            // Remember element position relative to viewport
+            const rect = element.getBoundingClientRect();
+            const topBefore = rect.top;
+            
             element.classList.toggle('open');
+            
+            // Restore position after DOM change
+            const topAfter = element.getBoundingClientRect().top;
+            if (topAfter !== topBefore) {
+                window.scrollBy(0, topAfter - topBefore);
+            }
         }
 
         function toggleFileCard(event, index) {
             event.preventDefault();
             event.stopPropagation();
             const card = document.querySelector(`.file-card[data-file-index="${index}"]`);
-            if (card) card.classList.toggle('open');
+            if (card) {
+                // Remember element position relative to viewport
+                const rect = card.getBoundingClientRect();
+                const topBefore = rect.top;
+                
+                card.classList.toggle('open');
+                
+                // Restore position after DOM change
+                const topAfter = card.getBoundingClientRect().top;
+                if (topAfter !== topBefore) {
+                    window.scrollBy(0, topAfter - topBefore);
+                }
+            }
         }
 
         function toggleAllFiles(datasetIndex) {
