@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-12-15T01:32:18.199949",
+  "generated_at": "2025-12-15T01:54:17.458792",
   "datasets": {
     "8 years of hourly heating and electricity consumption data- a residential building": {
       "name": "8 years of hourly heating and electricity consumption data- a residential building",
@@ -8341,8 +8341,187 @@
       "files_count": 1,
       "files": {
         "energy-consumption-time-series.csv": {
-          "error": "numpy boolean subtract, the `-` operator, is not supported, use the bitwise_xor, the `^` operator, or the logical_xor function instead.",
-          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Energy Consumption Time Series\\energy-consumption-time-series.csv"
+          "filename": "energy-consumption-time-series.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Energy Consumption Time Series\\energy-consumption-time-series.csv",
+          "total_rows": 200,
+          "total_columns": 10,
+          "columns": [
+            "record_id",
+            "consumer_id",
+            "consumer_type",
+            "region",
+            "timestamp",
+            "energy_consumed_kwh",
+            "peak_demand_kw",
+            "temperature_celsius",
+            "is_holiday",
+            "anomaly_flag"
+          ],
+          "memory_usage_mb": 0.06,
+          "column_details": {
+            "record_id": {
+              "dtype": "object",
+              "non_null_count": 200,
+              "null_count": 0,
+              "null_percentage": 0.0,
+              "classification": "metadata",
+              "unique_values": 200
+            },
+            "consumer_id": {
+              "dtype": "object",
+              "non_null_count": 200,
+              "null_count": 0,
+              "null_percentage": 0.0,
+              "classification": "metadata",
+              "unique_values": 192
+            },
+            "consumer_type": {
+              "dtype": "object",
+              "non_null_count": 200,
+              "null_count": 0,
+              "null_percentage": 0.0,
+              "classification": "metadata",
+              "unique_values": 2,
+              "value_counts": {
+                "residential": 103,
+                "commercial": 97
+              }
+            },
+            "region": {
+              "dtype": "object",
+              "non_null_count": 200,
+              "null_count": 0,
+              "null_percentage": 0.0,
+              "classification": "other",
+              "unique_values": 114
+            },
+            "timestamp": {
+              "dtype": "object",
+              "non_null_count": 200,
+              "null_count": 0,
+              "null_percentage": 0.0,
+              "classification": "datetime",
+              "unique_values": 174
+            },
+            "energy_consumed_kwh": {
+              "dtype": "float64",
+              "non_null_count": 200,
+              "null_count": 0,
+              "null_percentage": 0.0,
+              "classification": "energy",
+              "min": 0.0,
+              "max": 5200.0,
+              "mean": 117.62125,
+              "std": 489.97387035954614,
+              "median": 4.11,
+              "outliers_count": 15,
+              "outliers_percentage": 7.5
+            },
+            "peak_demand_kw": {
+              "dtype": "float64",
+              "non_null_count": 188,
+              "null_count": 12,
+              "null_percentage": 6.0,
+              "classification": "energy",
+              "min": 0.0,
+              "max": 1240.0,
+              "mean": 35.619468085106384,
+              "std": 132.06670538952204,
+              "median": 3.76,
+              "outliers_count": 10,
+              "outliers_percentage": 5.32
+            },
+            "temperature_celsius": {
+              "dtype": "float64",
+              "non_null_count": 200,
+              "null_count": 0,
+              "null_percentage": 0.0,
+              "classification": "weather",
+              "min": -36.5,
+              "max": 44.0,
+              "mean": 15.039000000000001,
+              "std": 16.624017830964362,
+              "median": 16.950000000000003,
+              "outliers_count": 3,
+              "outliers_percentage": 1.5
+            },
+            "is_holiday": {
+              "dtype": "bool",
+              "non_null_count": 200,
+              "null_count": 0,
+              "null_percentage": 0.0,
+              "classification": "time_feature"
+            },
+            "anomaly_flag": {
+              "dtype": "bool",
+              "non_null_count": 200,
+              "null_count": 0,
+              "null_percentage": 0.0,
+              "classification": "other"
+            }
+          },
+          "datetime_columns": [
+            "timestamp"
+          ],
+          "time_analysis": {
+            "timestamp": {
+              "median_interval": "3 hours",
+              "median_interval_seconds": 10800.0,
+              "min_date": "2023-12-25 12:00:00+00:00",
+              "max_date": "2024-12-25 22:00:00+00:00",
+              "date_range_days": 366,
+              "total_timestamps": 200,
+              "regularity_score": 0,
+              "significant_gaps_count": 69,
+              "gap_percentage": 34.67
+            }
+          },
+          "potential_metadata_columns": [
+            "consumer_type"
+          ],
+          "predictive_analysis": {
+            "scores": {
+              "energy_target": 25,
+              "exogenous_variables": 5,
+              "time_series_quality": 18,
+              "data_quality": 10,
+              "dataset_size": 3,
+              "time_features": 2,
+              "metadata": 5
+            },
+            "features": {
+              "energy_columns": [
+                "energy_consumed_kwh",
+                "peak_demand_kw"
+              ],
+              "has_energy_target": true,
+              "weather_columns": [
+                "temperature_celsius"
+              ],
+              "has_weather_data": true,
+              "sufficient_duration": true,
+              "time_granularity": "3 hours",
+              "avg_null_percentage": 0.6,
+              "size_category": "very_small",
+              "time_feature_columns": [
+                "is_holiday"
+              ],
+              "metadata_columns": [
+                "record_id",
+                "consumer_id",
+                "consumer_type"
+              ],
+              "multi_entity": true
+            },
+            "recommendations": [
+              "Irregular time intervals (regularity: 0%) - may need resampling",
+              "Significant gaps in data (34.67%) - interpolation may be needed",
+              "Small dataset (200 rows) - may not be sufficient for deep learning"
+            ],
+            "overall_score": 68,
+            "rating": "good",
+            "rating_description": "Good for predictive analysis with minor preprocessing"
+          }
         }
       },
       "description": "This dataset provides detailed, hourly electricity consumption records for both commercial and residential consumers, enriched with contextual information such as region, temperature, and holiday indicators. It is ideal for utility companies and researchers seeking to perform load forecasting, demand analysis, and anomaly detection at a granular level."

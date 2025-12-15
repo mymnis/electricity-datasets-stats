@@ -13,518 +13,598 @@
 
         body {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #fff;
+            background: #f5f5f5;
             color: #000;
             line-height: 1.6;
-            padding: 40px;
-            max-width: 1400px;
+            padding: 30px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
         header {
-            border-bottom: 2px solid #000;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
+            background: #000;
+            color: #fff;
+            padding: 30px;
+            margin: -30px -30px 30px -30px;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 300;
             letter-spacing: -1px;
         }
 
         .meta {
             font-size: 0.85rem;
-            color: #666;
+            color: #999;
             margin-top: 8px;
         }
 
+        /* Controls */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 15px 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .sort-control, .filter-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sort-control label, .filter-control label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+        }
+
+        .sort-control select, .filter-control input {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 6px;
+            margin-left: auto;
+        }
+
+        .filter-tag {
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tag:hover { border-color: #000; }
+        .filter-tag.active { background: #000; color: #fff; border-color: #000; }
+
+        /* Summary Grid */
         .summary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
         .summary-card {
-            border: 1px solid #000;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             padding: 20px;
+            text-align: center;
         }
 
         .summary-card .value {
-            font-size: 2.5rem;
-            font-weight: 200;
+            font-size: 2rem;
+            font-weight: 300;
         }
 
         .summary-card .label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #666;
         }
 
+        /* Dataset Card */
         .dataset {
-            border: 1px solid #000;
-            margin-bottom: 30px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
         }
 
+        .dataset.hidden { display: none; }
+
         .dataset-header {
-            background: #000;
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
             color: #fff;
-            padding: 20px;
+            padding: 18px 25px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
+        .dataset-header:hover {
+            background: linear-gradient(135deg, #000 0%, #222 100%);
+        }
+
         .dataset-header h2 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .dataset-header .toggle {
-            font-size: 1.5rem;
-            font-weight: 200;
-        }
-
-        .dataset-body {
-            padding: 20px;
-            display: none;
-        }
-
-        .dataset.open .dataset-body {
-            display: block;
+            font-size: 1.2rem;
+            font-weight: 300;
+            transition: transform 0.3s;
         }
 
         .dataset.open .toggle {
             transform: rotate(45deg);
         }
 
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
+        .dataset-body {
+            display: none;
+            padding: 0;
         }
 
-        .stat {
-            padding: 15px;
-            background: #f9f9f9;
+        .dataset.open .dataset-body {
+            display: block;
         }
 
-        .stat .value {
-            font-size: 1.5rem;
-            font-weight: 300;
-        }
-
-        .stat .label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #666;
-        }
-
-        .time-info {
-            background: #f5f5f5;
-            padding: 15px;
-            margin: 15px 0;
-            border-left: 3px solid #000;
-        }
-
-        .time-info h4 {
-            font-weight: 500;
-            margin-bottom: 10px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .time-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 10px;
-        }
-
-        .time-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .time-item .label {
-            font-size: 0.7rem;
-            color: #666;
-            text-transform: uppercase;
-        }
-
-        .time-item .value {
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .columns-section {
-            margin-top: 20px;
-        }
-
-        .columns-section h4 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .column-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .column-tag {
-            background: #fff;
-            border: 1px solid #ccc;
-            padding: 4px 10px;
-            font-size: 0.75rem;
-            font-family: 'Consolas', monospace;
-        }
-
-        .column-tag.datetime {
-            border-color: #000;
-            background: #000;
-            color: #fff;
-        }
-
-        .column-tag.metadata {
-            border-color: #666;
-            background: #666;
-            color: #fff;
-        }
-
-        .column-tag.numeric {
-            background: #f0f0f0;
-        }
-
-        .file-section {
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-            margin-top: 20px;
-        }
-
-        .file-section:first-child {
-            border-top: none;
-            padding-top: 0;
-            margin-top: 0;
-        }
-
-        .file-name {
-            font-family: 'Consolas', monospace;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            padding: 8px;
-            background: #f9f9f9;
-        }
-
-        .bar-chart {
-            margin: 20px 0;
-        }
-
-        .bar-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .bar-label {
-            width: 200px;
-            font-size: 0.75rem;
-            font-family: 'Consolas', monospace;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .bar-container {
-            flex: 1;
-            height: 20px;
-            background: #f0f0f0;
-            margin: 0 10px;
-        }
-
-        .bar {
-            height: 100%;
-            background: #000;
-            transition: width 0.3s ease;
-        }
-
-        .bar-value {
-            width: 80px;
-            font-size: 0.75rem;
-            text-align: right;
-        }
-
-        .legend {
-            display: flex;
-            gap: 20px;
-            margin: 20px 0;
-            padding: 15px;
-            background: #f9f9f9;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.75rem;
-        }
-
-        .legend-color {
-            width: 12px;
-            height: 12px;
-        }
-
-        .legend-color.datetime { background: #000; }
-        .legend-color.metadata { background: #666; }
-        .legend-color.numeric { background: #f0f0f0; border: 1px solid #ccc; }
-        .legend-color.other { background: #fff; border: 1px solid #ccc; }
-
-        .null-indicator {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-left: 5px;
-        }
-
-        .null-indicator.good { background: #000; }
-        .null-indicator.warning { background: #999; }
-        .null-indicator.bad { background: #ddd; }
-
-        .loading {
-            text-align: center;
-            padding: 100px;
-            font-size: 1.2rem;
-            color: #666;
-        }
-
-        .error {
-            background: #f5f5f5;
-            padding: 20px;
-            border-left: 3px solid #999;
-            color: #666;
-        }
-
-        /* Predictive Analysis Styles */
-        .predictive-card {
-            border: 2px solid #000;
-            margin: 20px 0;
-            padding: 20px;
-        }
-
-        .predictive-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .predictive-header h4 {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .score-badge {
-            font-size: 1.8rem;
-            font-weight: 200;
-            padding: 5px 15px;
-            border: none;
-            color: #fff;
-        }
-
-        /* Score colors removed - now using dynamic JS colors */
-
-        .rating-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 5px;
-            text-align: center;
-        }
-
-        .score-breakdown {
+        /* Dataset Summary Bar */
+        .dataset-summary-bar {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 1px;
+            background: #eee;
+            border-bottom: 1px solid #ddd;
         }
 
-        .score-item {
+        .summary-stat {
+            background: #fafafa;
+            padding: 15px;
             text-align: center;
-            padding: 10px;
-            background: #f9f9f9;
         }
 
-        .score-item .score-value {
+        .summary-stat .value {
             font-size: 1.3rem;
             font-weight: 300;
         }
 
-        .score-item .score-label {
+        .summary-stat .label {
             font-size: 0.65rem;
             text-transform: uppercase;
             color: #666;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
+        /* Description Box */
+        .description-box {
+            background: #f8f9fa;
+            padding: 15px 25px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #eee;
+            color: #555;
+            line-height: 1.7;
         }
 
-        .feature-item {
+        /* Predictive Score Card */
+        .predictive-summary {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.8rem;
+            gap: 25px;
+            padding: 20px 25px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
         }
 
-        .feature-icon {
-            width: 20px;
-            height: 20px;
+        .score-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 1px solid #000;
-            font-size: 0.7rem;
+            color: #fff;
+            flex-shrink: 0;
         }
 
-        .feature-icon.yes { background: #000; color: #fff; }
-        .feature-icon.no { background: #fff; color: #000; }
-
-        .recommendations {
-            background: #f5f5f5;
-            padding: 15px;
-            border-left: 3px solid #000;
+        .score-circle .score-value {
+            font-size: 1.8rem;
+            font-weight: 300;
+            line-height: 1;
         }
 
-        .recommendations h5 {
-            font-size: 0.75rem;
+        .score-circle .score-max {
+            font-size: 0.6rem;
+            opacity: 0.8;
+        }
+
+        .score-details {
+            flex: 1;
+        }
+
+        .score-details h4 {
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 10px;
+            color: #333;
         }
 
-        .recommendations ul {
-            list-style: none;
-            padding: 0;
+        .score-bars {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
         }
 
-        .recommendations li {
-            font-size: 0.8rem;
-            padding: 5px 0;
+        .score-bar-item {
+            text-align: center;
+        }
+
+        .score-bar-track {
+            height: 6px;
+            background: #eee;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .score-bar-fill {
+            height: 100%;
+            background: #000;
+            border-radius: 3px;
+        }
+
+        .score-bar-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            color: #666;
+        }
+
+        .score-bar-value {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Features Pills */
+        .features-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .feature-pill {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            background: #f0f0f0;
+        }
+
+        .feature-pill.yes { background: #e8f5e9; color: #2e7d32; }
+        .feature-pill.no { background: #ffebee; color: #c62828; }
+
+        /* Files Section */
+        .files-section {
+            padding: 20px 25px;
+        }
+
+        .files-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #000;
+        }
+
+        .files-section-header h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .files-toggle-all {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #666;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* File Card */
+        .file-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .file-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fafafa;
+            cursor: pointer;
+            border-bottom: 1px solid transparent;
+        }
+
+        .file-card.open .file-card-header {
+            border-bottom-color: #e0e0e0;
+        }
+
+        .file-card-header:hover {
+            background: #f0f0f0;
+        }
+
+        .file-card-name {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .file-card-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .file-card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .file-card-score {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .file-card-toggle {
+            font-size: 1rem;
+            color: #999;
+            transition: transform 0.2s;
+        }
+
+        .file-card.open .file-card-toggle {
+            transform: rotate(90deg);
+        }
+
+        .file-card-body {
+            display: none;
+            padding: 20px;
+            background: #fff;
+        }
+
+        .file-card.open .file-card-body {
+            display: block;
+        }
+
+        /* File Stats Grid */
+        .file-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .file-stats-section {
+            background: #f9f9f9;
+            border-radius: 6px;
+            padding: 15px;
+        }
+
+        .file-stats-section h5 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
             border-bottom: 1px solid #e0e0e0;
         }
 
-        .recommendations li:last-child {
-            border-bottom: none;
+        .mini-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
         }
 
-        .column-tags-section {
-            margin: 15px 0;
+        .mini-stat {
+            text-align: center;
         }
 
-        .column-tags-section h5 {
-            font-size: 0.75rem;
+        .mini-stat .value {
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .mini-stat .label {
+            font-size: 0.6rem;
             text-transform: uppercase;
-            color: #666;
+            color: #888;
+        }
+
+        /* Time Info Compact */
+        .time-info-compact {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .time-info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .time-info-item .label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        .time-info-item .value {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Columns Compact */
+        .columns-compact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .column-chip {
+            padding: 4px 10px;
+            font-size: 0.7rem;
+            font-family: 'Consolas', monospace;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .column-chip.energy { background: #000; color: #fff; border-color: #000; }
+        .column-chip.weather { background: #1976d2; color: #fff; border-color: #1976d2; }
+        .column-chip.datetime { background: #7b1fa2; color: #fff; border-color: #7b1fa2; }
+        .column-chip.metadata { background: #388e3c; color: #fff; border-color: #388e3c; }
+
+        /* Recommendations */
+        .recommendations-compact {
+            margin-top: 15px;
+            padding: 12px;
+            background: #fff3e0;
+            border-radius: 6px;
+            border-left: 3px solid #ff9800;
+        }
+
+        .recommendations-compact h5 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #e65100;
             margin-bottom: 8px;
         }
 
-        .column-tag.energy {
-            border-color: #000;
-            background: #000;
-            color: #fff;
+        .recommendations-compact ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .column-tag.weather {
-            border-color: #444;
-            background: #444;
-            color: #fff;
+        .recommendations-compact li {
+            font-size: 0.8rem;
+            padding: 3px 0;
+            color: #555;
         }
 
-        .description-box {
-            background: #f9f9f9;
+        .recommendations-compact li::before {
+            content: "→ ";
+            color: #ff9800;
+        }
+
+        /* Error */
+        .error-box {
             padding: 15px;
-            margin-bottom: 20px;
+            background: #ffebee;
+            border-left: 3px solid #f44336;
+            color: #c62828;
             font-size: 0.85rem;
-            border-left: 3px solid #666;
         }
 
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #666;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            body {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .bar-label {
-                width: 100px;
-            }
+            body { padding: 15px; }
+            header { margin: -15px -15px 20px -15px; padding: 20px; }
+            .summary-grid { grid-template-columns: repeat(2, 1fr); }
+            .score-bars { grid-template-columns: repeat(3, 1fr); }
+            .file-card-meta { display: none; }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Dataset Statistics</h1>
-        <p class="meta">Generated: <span id="generated-at">-</span></p>
+        <h1>⚡ Energy Dataset Analytics</h1>
+        <p class="meta">Generated: <span id="generated-at">-</span> | Predictive Analysis for ML Suitability</p>
     </header>
+
+    <div class="controls">
+        <div class="sort-control">
+            <label>Sort:</label>
+            <select id="sort-select" onchange="sortDatasets()">
+                <option value="score-desc">⚡ Score (High → Low)</option>
+                <option value="score-asc">⚡ Score (Low → High)</option>
+                <option value="rows-desc">📊 Rows (High → Low)</option>
+                <option value="files-desc">📁 Files (High → Low)</option>
+                <option value="duration-desc">📅 Duration (Long → Short)</option>
+                <option value="name-asc">🔤 Name (A → Z)</option>
+            </select>
+        </div>
+        <div class="filter-control">
+            <label>Search:</label>
+            <input type="text" id="filter-input" placeholder="Filter datasets..." oninput="filterDatasets()">
+        </div>
+        <div class="filter-tags">
+            <span class="filter-tag" data-filter="excellent" onclick="toggleFilterTag(this)">Excellent</span>
+            <span class="filter-tag" data-filter="good" onclick="toggleFilterTag(this)">Good</span>
+            <span class="filter-tag" data-filter="moderate" onclick="toggleFilterTag(this)">Moderate</span>
+            <span class="filter-tag" data-filter="poor" onclick="toggleFilterTag(this)">Poor</span>
+        </div>
+    </div>
 
     <div class="summary-grid" id="summary-grid"></div>
 
-    <div class="legend">
-        <div class="legend-item">
-            <div class="legend-color" style="background: #000;"></div>
-            <span>Energy</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color" style="background: #444;"></div>
-            <span>Weather</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color datetime"></div>
-            <span>Datetime</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color metadata"></div>
-            <span>Metadata</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color numeric"></div>
-            <span>Numeric</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color other"></div>
-            <span>Other</span>
-        </div>
-    </div>
-
     <div id="datasets-container">
-        <div class="loading">Loading data...</div>
+        <div class="loading">Loading datasets...</div>
     </div>
 
     <script>
+        let datasetsData = {};
+        let datasetsMeta = {};
+
         function formatNumber(num) {
             if (num === null || num === undefined) return '-';
             if (typeof num === 'number') {
-                if (Number.isInteger(num)) {
-                    return num.toLocaleString();
-                }
+                if (Number.isInteger(num)) return num.toLocaleString();
                 return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
             }
             return num;
@@ -535,402 +615,334 @@
             return dateStr.split('T')[0];
         }
 
-        function getColumnClass(colName, columnDetails) {
-            const details = columnDetails[colName];
-            const classification = details?.classification;
-            
-            if (classification === 'energy') return 'energy';
-            if (classification === 'weather') return 'weather';
-            if (classification === 'datetime') return 'datetime';
-            if (classification === 'metadata') return 'metadata';
-            if (details?.dtype && (details.dtype.includes('int') || details.dtype.includes('float'))) return 'numeric';
-            return '';
-        }
-
         function getScoreColor(score) {
-            // Gradient from dark red (0) to green (100)
-            // 0 = #8B0000 (dark red)
-            // 50 = #FFA500 (orange)  
-            // 100 = #228B22 (forest green)
-            
-            score = Math.max(0, Math.min(100, score));
-            
+            score = Math.max(0, Math.min(100, score || 0));
             let r, g, b;
-            
             if (score <= 50) {
-                // Dark red to orange
                 const t = score / 50;
-                r = Math.round(139 + (255 - 139) * t);  // 139 -> 255
-                g = Math.round(0 + 165 * t);            // 0 -> 165
-                b = Math.round(0);                       // 0 -> 0
+                r = Math.round(139 + (255 - 139) * t);
+                g = Math.round(0 + 165 * t);
+                b = 0;
             } else {
-                // Orange to green
                 const t = (score - 50) / 50;
-                r = Math.round(255 - (255 - 34) * t);   // 255 -> 34
-                g = Math.round(165 + (139 - 165) * t);  // 165 -> 139
-                b = Math.round(0 + 34 * t);             // 0 -> 34
+                r = Math.round(255 - (255 - 34) * t);
+                g = Math.round(165 + (139 - 165) * t);
+                b = Math.round(0 + 34 * t);
             }
-            
             return `rgb(${r}, ${g}, ${b})`;
         }
 
-        function renderPredictiveAnalysis(predictive) {
-            if (!predictive) return '';
-            
-            const scores = predictive.scores || {};
-            const features = predictive.features || {};
-            const recommendations = predictive.recommendations || [];
-            const scoreColor = getScoreColor(predictive.overall_score || 0);
-            
-            return `
-                <div class="predictive-card">
-                    <div class="predictive-header">
-                        <h4>⚡ Predictive Analysis Suitability</h4>
-                        <div>
-                            <div class="score-badge" style="background: ${scoreColor};">${predictive.overall_score}/100</div>
-                            <div class="rating-label">${predictive.rating}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="score-breakdown">
-                        <div class="score-item">
-                            <div class="score-value">${scores.energy_target || 0}/25</div>
-                            <div class="score-label">Energy Target</div>
-                        </div>
-                        <div class="score-item">
-                            <div class="score-value">${scores.time_series_quality || 0}/30</div>
-                            <div class="score-label">Time Quality</div>
-                        </div>
-                        <div class="score-item">
-                            <div class="score-value">${scores.exogenous_variables || 0}/15</div>
-                            <div class="score-label">Weather Data</div>
-                        </div>
-                        <div class="score-item">
-                            <div class="score-value">${scores.dataset_size || 0}/15</div>
-                            <div class="score-label">Dataset Size</div>
-                        </div>
-                        <div class="score-item">
-                            <div class="score-value">${scores.data_quality || 0}/10</div>
-                            <div class="score-label">Data Quality</div>
-                        </div>
-                    </div>
-                    
-                    <div class="features-grid">
-                        <div class="feature-item">
-                            <div class="feature-icon ${features.has_energy_target ? 'yes' : 'no'}">${features.has_energy_target ? '✓' : '✗'}</div>
-                            <span>Energy consumption column</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon ${features.has_weather_data ? 'yes' : 'no'}">${features.has_weather_data ? '✓' : '✗'}</div>
-                            <span>Weather/exogenous data</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon ${features.sufficient_duration ? 'yes' : 'no'}">${features.sufficient_duration ? '✓' : '✗'}</div>
-                            <span>Sufficient duration</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon ${features.multi_entity ? 'yes' : 'no'}">${features.multi_entity ? '✓' : '✗'}</div>
-                            <span>Multi-entity data</span>
-                        </div>
-                    </div>
-                    
-                    ${features.time_granularity ? `<div class="feature-item" style="margin-bottom: 15px;"><strong>Granularity:</strong> ${features.time_granularity} | <strong>Size:</strong> ${features.size_category || 'unknown'} | <strong>Avg nulls:</strong> ${features.avg_null_percentage || 0}%</div>` : ''}
-                    
-                    ${features.energy_columns?.length > 0 ? `
-                        <div class="column-tags-section">
-                            <h5>Energy columns</h5>
-                            <div class="column-list">${features.energy_columns.map(c => `<span class="column-tag energy">${c}</span>`).join('')}</div>
-                        </div>
-                    ` : ''}
-                    
-                    ${features.weather_columns?.length > 0 ? `
-                        <div class="column-tags-section">
-                            <h5>Weather columns</h5>
-                            <div class="column-list">${features.weather_columns.map(c => `<span class="column-tag weather">${c}</span>`).join('')}</div>
-                        </div>
-                    ` : ''}
-                    
-                    ${recommendations.length > 0 ? `
-                        <div class="recommendations">
-                            <h5>⚠ Recommendations</h5>
-                            <ul>${recommendations.map(r => `<li>${r}</li>`).join('')}</ul>
-                        </div>
-                    ` : ''}
-                </div>
-            `;
-        }
+        function extractDatasetMeta(name, data) {
+            let score = 0, rating = 'poor', rows = 0, files = 0, duration = 0;
 
-        function renderTimeInfo(timeAnalysis) {
-            if (!timeAnalysis || Object.keys(timeAnalysis).length === 0) return '';
-            
-            let html = '<div class="time-info"><h4>⏱ Time Series Info</h4><div class="time-grid">';
-            
-            for (const [col, info] of Object.entries(timeAnalysis)) {
-                if (info.min_date) {
-                    html += `
-                        <div class="time-item">
-                            <span class="label">Start Date</span>
-                            <span class="value">${formatDate(info.min_date)}</span>
-                        </div>
-                        <div class="time-item">
-                            <span class="label">End Date</span>
-                            <span class="value">${formatDate(info.max_date)}</span>
-                        </div>
-                        <div class="time-item">
-                            <span class="label">Duration</span>
-                            <span class="value">${formatNumber(info.date_range_days)} days</span>
-                        </div>
-                        <div class="time-item">
-                            <span class="label">Interval</span>
-                            <span class="value">${info.median_interval}</span>
-                        </div>
-                        <div class="time-item">
-                            <span class="label">Regularity</span>
-                            <span class="value">${info.regularity_score || '-'}%</span>
-                        </div>
-                        <div class="time-item">
-                            <span class="label">Gaps</span>
-                            <span class="value">${info.gap_percentage || 0}%</span>
-                        </div>
-                    `;
-                    break;
-                }
-            }
-            
-            html += '</div></div>';
-            return html;
-        }
-
-        function renderColumns(columns, columnDetails) {
-            let html = '<div class="columns-section"><h4>Columns</h4><div class="column-list">';
-            
-            for (const col of columns) {
-                const details = columnDetails[col];
-                const colClass = getColumnClass(col, columnDetails);
-                const nullPct = details?.null_percentage || 0;
-                let nullClass = 'good';
-                if (nullPct > 5) nullClass = 'warning';
-                if (nullPct > 20) nullClass = 'bad';
-                
-                html += `<span class="column-tag ${colClass}" title="${details?.classification || ''} | ${details?.dtype || ''} | ${nullPct}% null">${col}<span class="null-indicator ${nullClass}"></span></span>`;
-            }
-            
-            html += '</div></div>';
-            return html;
-        }
-
-        function renderBarChart(columnDetails, columns) {
-            const numericCols = columns.filter(col => {
-                const dtype = columnDetails[col]?.dtype || '';
-                return dtype.includes('int') || dtype.includes('float');
-            }).slice(0, 10);
-
-            if (numericCols.length === 0) return '';
-
-            const maxVal = Math.max(...numericCols.map(col => Math.abs(columnDetails[col]?.mean || 0)));
-            
-            let html = '<div class="bar-chart"><h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 15px;">Mean Values (Top 10 Numeric)</h4>';
-            
-            for (const col of numericCols) {
-                const mean = columnDetails[col]?.mean || 0;
-                const pct = maxVal > 0 ? (Math.abs(mean) / maxVal * 100) : 0;
-                
-                html += `
-                    <div class="bar-row">
-                        <span class="bar-label" title="${col}">${col}</span>
-                        <div class="bar-container">
-                            <div class="bar" style="width: ${pct}%"></div>
-                        </div>
-                        <span class="bar-value">${formatNumber(mean)}</span>
-                    </div>
-                `;
-            }
-            
-            html += '</div>';
-            return html;
-        }
-
-        function renderFileStats(fileInfo) {
-            if (fileInfo.error) {
-                return `<div class="error">Error: ${fileInfo.error}</div>`;
-            }
-
-            return `
-                <div class="stats-row">
-                    <div class="stat">
-                        <div class="value">${formatNumber(fileInfo.total_rows)}</div>
-                        <div class="label">Rows</div>
-                    </div>
-                    <div class="stat">
-                        <div class="value">${fileInfo.total_columns}</div>
-                        <div class="label">Columns</div>
-                    </div>
-                    <div class="stat">
-                        <div class="value">${fileInfo.memory_usage_mb}</div>
-                        <div class="label">Size (MB)</div>
-                    </div>
-                </div>
-                ${renderPredictiveAnalysis(fileInfo.predictive_analysis)}
-                ${renderTimeInfo(fileInfo.time_analysis)}
-                ${renderColumns(fileInfo.columns, fileInfo.column_details)}
-                ${renderBarChart(fileInfo.column_details, fileInfo.columns)}
-            `;
-        }
-
-        function renderCategoryInfo(categories) {
-            if (!categories || Object.keys(categories).length === 0) return '';
-            
-            let html = '<div class="categories-section"><h4 style="font-size: 0.85rem; text-transform: uppercase; margin-bottom: 15px;">📂 Data Categories</h4>';
-            html += '<div class="stats-row">';
-            
-            for (const [catName, catData] of Object.entries(categories)) {
-                const icon = catName === 'consumption' ? '⚡' : 
-                            catName === 'generation' ? '🔋' : 
-                            catName === 'climate' ? '🌡️' : 
-                            catName === 'distribution' ? '🔌' : '📁';
-                
-                html += `
-                    <div class="stat">
-                        <div class="value">${icon}</div>
-                        <div class="label">${catName}</div>
-                        <div style="font-size: 0.7rem; color: #666; margin-top: 5px;">
-                            ${catData.total_files_in_category || catData.folder_count || '?'} files
-                        </div>
-                    </div>
-                `;
-            }
-            html += '</div>';
-            
-            // Show sample analysis for each category
-            for (const [catName, catData] of Object.entries(categories)) {
-                if (catData.sample_analysis) {
-                    html += `
-                        <div class="file-section">
-                            <div class="file-name">Sample from ${catName}: ${catData.sample_file || 'sample.csv'}</div>
-                            ${renderFileStats(catData.sample_analysis)}
-                        </div>
-                    `;
-                }
-            }
-            
-            html += '</div>';
-            return html;
-        }
-
-        function renderDataset(name, data, index) {
-            let content = '';
-            let totalRows = 0;
-            let totalCols = 0;
-            let bestScore = 0;
-            let bestRating = 'poor';
-            
-            // Add description if available
-            if (data.description) {
-                content += `<div class="description-box">${data.description}</div>`;
-            }
-            
-            // Handle hierarchical datasets
             if (data.type === 'hierarchical') {
-                // Show aggregated stats
-                const agg = data.aggregated_stats;
-                if (agg) {
-                    content += `
-                        <div class="stats-row">
-                            <div class="stat">
-                                <div class="value">${formatNumber(agg.total_csv_files)}</div>
-                                <div class="label">Total CSV Files</div>
-                            </div>
-                            <div class="stat">
-                                <div class="value">${agg.categories_found?.length || 0}</div>
-                                <div class="label">Categories</div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    // Show aggregated predictive analysis
-                    if (agg.predictive_analysis) {
-                        bestScore = agg.predictive_analysis.overall_score || 0;
-                        bestRating = agg.predictive_analysis.rating || 'poor';
-                        content += renderPredictiveAnalysis(agg.predictive_analysis);
-                    }
+                files = data.total_csv_files || 0;
+                if (data.aggregated_stats?.predictive_analysis) {
+                    score = data.aggregated_stats.predictive_analysis.overall_score || 0;
+                    rating = data.aggregated_stats.predictive_analysis.rating || 'poor';
+                    duration = data.aggregated_stats.predictive_analysis.features?.date_range_days || 0;
                 }
-                
-                // Show categories
-                if (data.categories) {
-                    content += renderCategoryInfo(data.categories);
-                }
-                
-                // Show root files if any
-                if (data.files && Object.keys(data.files).length > 0) {
-                    for (const [fileName, fileInfo] of Object.entries(data.files)) {
-                        content += `
-                            <div class="file-section">
-                                <div class="file-name">📄 ${fileName}</div>
-                                ${renderFileStats(fileInfo)}
-                            </div>
-                        `;
-                    }
-                }
-            } else if (data.type === 'folder') {
-                for (const [fileName, fileInfo] of Object.entries(data.files || {})) {
-                    if (!fileInfo.error) {
-                        totalRows += fileInfo.total_rows || 0;
-                        totalCols = Math.max(totalCols, fileInfo.total_columns || 0);
-                        
-                        // Track best predictive score
-                        const score = fileInfo.predictive_analysis?.overall_score || 0;
-                        if (score > bestScore) {
-                            bestScore = score;
-                            bestRating = fileInfo.predictive_analysis?.rating || 'poor';
-                        }
-                    }
-                    content += `
-                        <div class="file-section">
-                            <div class="file-name">📄 ${fileName}</div>
-                            ${renderFileStats(fileInfo)}
-                        </div>
-                    `;
-                }
-                
-                // Handle subfolders if present
-                if (data.subfolders) {
-                    for (const [subName, subData] of Object.entries(data.subfolders)) {
-                        if (subData.sample_analysis) {
-                            const score = subData.sample_analysis.predictive_analysis?.overall_score || 0;
-                            if (score > bestScore) {
-                                bestScore = score;
-                                bestRating = subData.sample_analysis.predictive_analysis?.rating || 'poor';
-                            }
-                            content += `
-                                <div class="file-section">
-                                    <div class="file-name">📁 ${subName}/ (${subData.csv_count} files) — sample: ${subData.sample_file}</div>
-                                    ${renderFileStats(subData.sample_analysis)}
-                                </div>
-                            `;
-                        }
+                for (const cat of Object.values(data.categories || {})) {
+                    if (cat.sample_analysis && !cat.sample_analysis.error) {
+                        rows += (cat.sample_analysis.total_rows || 0) * (cat.total_files_in_category || 1);
                     }
                 }
             } else {
-                const fileInfo = data.file_info;
-                if (fileInfo && !fileInfo.error) {
-                    totalRows = fileInfo.total_rows || 0;
-                    totalCols = fileInfo.total_columns || 0;
-                    bestScore = fileInfo.predictive_analysis?.overall_score || 0;
-                    bestRating = fileInfo.predictive_analysis?.rating || 'poor';
+                files = data.files_count || Object.keys(data.files || {}).length;
+                for (const file of Object.values(data.files || {})) {
+                    if (!file.error) {
+                        rows += file.total_rows || 0;
+                        const fileScore = file.predictive_analysis?.overall_score || 0;
+                        if (fileScore > score) {
+                            score = fileScore;
+                            rating = file.predictive_analysis?.rating || 'poor';
+                        }
+                        if (!duration && file.time_analysis) {
+                            for (const ta of Object.values(file.time_analysis)) {
+                                if (ta.date_range_days) { duration = ta.date_range_days; break; }
+                            }
+                        }
+                    }
                 }
-                if (fileInfo) content += renderFileStats(fileInfo);
+                for (const sub of Object.values(data.subfolders || {})) {
+                    files += sub.csv_count || 0;
+                    if (sub.sample_analysis && !sub.sample_analysis.error) {
+                        rows += (sub.sample_analysis.total_rows || 0) * (sub.csv_count || 1);
+                        const subScore = sub.sample_analysis.predictive_analysis?.overall_score || 0;
+                        if (subScore > score) {
+                            score = subScore;
+                            rating = sub.sample_analysis.predictive_analysis?.rating || 'poor';
+                        }
+                    }
+                }
             }
+            return { name, score, rating, rows, files, duration };
+        }
 
-            const typeIcon = data.type === 'hierarchical' ? '🗂️' : data.type === 'folder' ? '📁' : '📄';
-            const filesCount = data.total_csv_files ? ` (${data.total_csv_files} files)` : 
-                              data.files_count ? ` (${data.files_count} files)` : '';
-            const headerScoreColor = getScoreColor(bestScore);
-            const scoreIndicator = bestScore > 0 ? `<span class="score-badge" style="font-size: 1rem; padding: 2px 8px; margin-left: 15px; background: ${headerScoreColor};">${bestScore}</span>` : '';
+        function renderDatasetSummaryBar(meta) {
+            return `
+                <div class="dataset-summary-bar">
+                    <div class="summary-stat">
+                        <div class="value">${formatNumber(meta.files)}</div>
+                        <div class="label">Files</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="value">${formatNumber(meta.rows)}</div>
+                        <div class="label">Total Rows</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="value">${meta.duration || '-'}</div>
+                        <div class="label">Days</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="value" style="color: ${getScoreColor(meta.score)}">${meta.score}/100</div>
+                        <div class="label">ML Score</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPredictiveSummary(predictive) {
+            if (!predictive) return '';
+            const scores = predictive.scores || {};
+            const features = predictive.features || {};
+            const scoreColor = getScoreColor(predictive.overall_score || 0);
+
+            const scoreItems = [
+                { key: 'energy_target', label: 'Energy', max: 25 },
+                { key: 'time_series_quality', label: 'Time', max: 30 },
+                { key: 'exogenous_variables', label: 'Weather', max: 15 },
+                { key: 'dataset_size', label: 'Size', max: 15 },
+                { key: 'data_quality', label: 'Quality', max: 10 }
+            ];
 
             return `
-                <div class="dataset" data-index="${index}">
-                    <div class="dataset-header" onclick="toggleDataset(${index})">
-                        <h2>${typeIcon} ${name}${filesCount}${scoreIndicator}</h2>
+                <div class="predictive-summary">
+                    <div class="score-circle" style="background: ${scoreColor}">
+                        <span class="score-value">${predictive.overall_score || 0}</span>
+                        <span class="score-max">/100</span>
+                    </div>
+                    <div class="score-details">
+                        <h4>ML Suitability: ${predictive.rating?.toUpperCase() || 'N/A'}</h4>
+                        <div class="score-bars">
+                            ${scoreItems.map(item => `
+                                <div class="score-bar-item">
+                                    <div class="score-bar-track">
+                                        <div class="score-bar-fill" style="width: ${((scores[item.key] || 0) / item.max) * 100}%"></div>
+                                    </div>
+                                    <div class="score-bar-value">${scores[item.key] || 0}/${item.max}</div>
+                                    <div class="score-bar-label">${item.label}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="features-pills">
+                            <span class="feature-pill ${features.has_energy_target ? 'yes' : 'no'}">
+                                ${features.has_energy_target ? '✓' : '✗'} Energy Target
+                            </span>
+                            <span class="feature-pill ${features.has_weather_data ? 'yes' : 'no'}">
+                                ${features.has_weather_data ? '✓' : '✗'} Weather Data
+                            </span>
+                            <span class="feature-pill ${features.sufficient_duration ? 'yes' : 'no'}">
+                                ${features.sufficient_duration ? '✓' : '✗'} Duration
+                            </span>
+                            ${features.time_granularity ? `<span class="feature-pill">📊 ${features.time_granularity}</span>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderFileCard(fileName, fileInfo, index) {
+            if (fileInfo.error) {
+                return `
+                    <div class="file-card">
+                        <div class="file-card-header">
+                            <span class="file-card-name">📄 ${fileName}</span>
+                        </div>
+                        <div class="error-box">Error: ${fileInfo.error}</div>
+                    </div>
+                `;
+            }
+
+            const score = fileInfo.predictive_analysis?.overall_score || 0;
+            const scoreColor = getScoreColor(score);
+            const timeInfo = fileInfo.time_analysis ? Object.values(fileInfo.time_analysis)[0] : null;
+            const predictive = fileInfo.predictive_analysis || {};
+            const features = predictive.features || {};
+            const recommendations = predictive.recommendations || [];
+
+            // Group columns by type
+            const colDetails = fileInfo.column_details || {};
+            const energyCols = [], weatherCols = [], datetimeCols = [], metadataCols = [], otherCols = [];
+            for (const [col, details] of Object.entries(colDetails)) {
+                const cls = details.classification;
+                if (cls === 'energy') energyCols.push(col);
+                else if (cls === 'weather') weatherCols.push(col);
+                else if (cls === 'datetime') datetimeCols.push(col);
+                else if (cls === 'metadata') metadataCols.push(col);
+                else otherCols.push(col);
+            }
+
+            return `
+                <div class="file-card" data-file-index="${index}">
+                    <div class="file-card-header" onclick="toggleFileCard(${index})">
+                        <span class="file-card-name">
+                            📄 ${fileName}
+                            <span class="file-card-score" style="background: ${scoreColor}">${score}</span>
+                        </span>
+                        <div class="file-card-meta">
+                            <span>📊 ${formatNumber(fileInfo.total_rows)} rows</span>
+                            <span>📋 ${fileInfo.total_columns} cols</span>
+                            <span>💾 ${fileInfo.memory_usage_mb} MB</span>
+                            ${timeInfo ? `<span>📅 ${timeInfo.date_range_days || '-'} days</span>` : ''}
+                        </div>
+                        <span class="file-card-toggle">›</span>
+                    </div>
+                    <div class="file-card-body">
+                        <div class="file-stats-grid">
+                            <div class="file-stats-section">
+                                <h5>📊 Basic Stats</h5>
+                                <div class="mini-stats">
+                                    <div class="mini-stat">
+                                        <div class="value">${formatNumber(fileInfo.total_rows)}</div>
+                                        <div class="label">Rows</div>
+                                    </div>
+                                    <div class="mini-stat">
+                                        <div class="value">${fileInfo.total_columns}</div>
+                                        <div class="label">Columns</div>
+                                    </div>
+                                    <div class="mini-stat">
+                                        <div class="value">${fileInfo.memory_usage_mb}</div>
+                                        <div class="label">MB</div>
+                                    </div>
+                                </div>
+                            </div>
+                            ${timeInfo ? `
+                            <div class="file-stats-section">
+                                <h5>⏱ Time Series</h5>
+                                <div class="time-info-compact">
+                                    <div class="time-info-item">
+                                        <span class="label">Start</span>
+                                        <span class="value">${formatDate(timeInfo.min_date)}</span>
+                                    </div>
+                                    <div class="time-info-item">
+                                        <span class="label">End</span>
+                                        <span class="value">${formatDate(timeInfo.max_date)}</span>
+                                    </div>
+                                    <div class="time-info-item">
+                                        <span class="label">Interval</span>
+                                        <span class="value">${timeInfo.median_interval || '-'}</span>
+                                    </div>
+                                    <div class="time-info-item">
+                                        <span class="label">Duration</span>
+                                        <span class="value">${timeInfo.date_range_days || '-'} days</span>
+                                    </div>
+                                    <div class="time-info-item">
+                                        <span class="label">Regularity</span>
+                                        <span class="value">${timeInfo.regularity_score || '-'}%</span>
+                                    </div>
+                                    <div class="time-info-item">
+                                        <span class="label">Gaps</span>
+                                        <span class="value">${timeInfo.gap_percentage || 0}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            ` : ''}
+                            <div class="file-stats-section">
+                                <h5>📋 Columns by Type</h5>
+                                <div class="columns-compact">
+                                    ${energyCols.map(c => `<span class="column-chip energy" title="Energy">${c}</span>`).join('')}
+                                    ${weatherCols.map(c => `<span class="column-chip weather" title="Weather">${c}</span>`).join('')}
+                                    ${datetimeCols.map(c => `<span class="column-chip datetime" title="Datetime">${c}</span>`).join('')}
+                                    ${metadataCols.map(c => `<span class="column-chip metadata" title="Metadata">${c}</span>`).join('')}
+                                    ${otherCols.slice(0, 10).map(c => `<span class="column-chip" title="Other">${c}</span>`).join('')}
+                                    ${otherCols.length > 10 ? `<span class="column-chip">+${otherCols.length - 10} more</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        ${recommendations.length > 0 ? `
+                            <div class="recommendations-compact">
+                                <h5>⚠ Recommendations</h5>
+                                <ul>${recommendations.map(r => `<li>${r}</li>`).join('')}</ul>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDataset(name, data, index) {
+            const meta = datasetsMeta[name] || extractDatasetMeta(name, data);
+            const scoreColor = getScoreColor(meta.score);
+            
+            let content = '';
+            
+            // Summary bar
+            content += renderDatasetSummaryBar(meta);
+            
+            // Description
+            if (data.description) {
+                const shortDesc = data.description.length > 300 
+                    ? data.description.substring(0, 300) + '...' 
+                    : data.description;
+                content += `<div class="description-box">${shortDesc}</div>`;
+            }
+
+            // Get best predictive analysis for summary
+            let bestPredictive = null;
+            if (data.type === 'hierarchical' && data.aggregated_stats?.predictive_analysis) {
+                bestPredictive = data.aggregated_stats.predictive_analysis;
+            } else {
+                for (const file of Object.values(data.files || {})) {
+                    if (file.predictive_analysis && (!bestPredictive || 
+                        (file.predictive_analysis.overall_score || 0) > (bestPredictive.overall_score || 0))) {
+                        bestPredictive = file.predictive_analysis;
+                    }
+                }
+            }
+            
+            if (bestPredictive) {
+                content += renderPredictiveSummary(bestPredictive);
+            }
+
+            // Files section
+            const files = Object.entries(data.files || {});
+            const subfolders = Object.entries(data.subfolders || {});
+            
+            if (files.length > 0 || subfolders.length > 0) {
+                content += `<div class="files-section">`;
+                content += `<div class="files-section-header">
+                    <h3>📁 Files (${files.length + subfolders.length})</h3>
+                    <span class="files-toggle-all" onclick="toggleAllFiles(${index})">Expand All</span>
+                </div>`;
+                
+                let fileIndex = 0;
+                for (const [fileName, fileInfo] of files) {
+                    content += renderFileCard(fileName, fileInfo, index * 1000 + fileIndex++);
+                }
+                
+                for (const [subName, subData] of subfolders) {
+                    if (subData.sample_analysis) {
+                        content += renderFileCard(
+                            `${subName}/ (${subData.csv_count} files) → ${subData.sample_file}`,
+                            subData.sample_analysis,
+                            index * 1000 + fileIndex++
+                        );
+                    }
+                }
+                
+                content += `</div>`;
+            }
+
+            const typeIcon = data.type === 'hierarchical' ? '🗂️' : '📁';
+
+            return `
+                <div class="dataset" data-index="${index}" data-name="${name}" data-score="${meta.score}" data-rating="${meta.rating}">
+                    <div class="dataset-header" onclick="toggleDataset(this.parentElement)">
+                        <h2>
+                            ${typeIcon} ${name}
+                            <span class="file-card-score" style="background: ${scoreColor}; font-size: 0.8rem;">${meta.score}</span>
+                        </h2>
                         <span class="toggle">+</span>
                     </div>
                     <div class="dataset-body">
@@ -940,51 +952,77 @@
             `;
         }
 
-        function toggleDataset(index) {
-            const dataset = document.querySelector(`.dataset[data-index="${index}"]`);
-            dataset.classList.toggle('open');
+        function toggleDataset(element) {
+            element.classList.toggle('open');
+        }
+
+        function toggleFileCard(index) {
+            const card = document.querySelector(`.file-card[data-file-index="${index}"]`);
+            if (card) card.classList.toggle('open');
+        }
+
+        function toggleAllFiles(datasetIndex) {
+            const dataset = document.querySelector(`.dataset[data-index="${datasetIndex}"]`);
+            const cards = dataset.querySelectorAll('.file-card');
+            const allOpen = Array.from(cards).every(c => c.classList.contains('open'));
+            cards.forEach(c => {
+                if (allOpen) c.classList.remove('open');
+                else c.classList.add('open');
+            });
+        }
+
+        function sortDatasets() {
+            const sortBy = document.getElementById('sort-select').value;
+            const container = document.getElementById('datasets-container');
+            const datasets = Array.from(container.querySelectorAll('.dataset'));
+
+            datasets.sort((a, b) => {
+                const metaA = datasetsMeta[a.dataset.name] || {};
+                const metaB = datasetsMeta[b.dataset.name] || {};
+                switch (sortBy) {
+                    case 'score-desc': return (metaB.score || 0) - (metaA.score || 0);
+                    case 'score-asc': return (metaA.score || 0) - (metaB.score || 0);
+                    case 'rows-desc': return (metaB.rows || 0) - (metaA.rows || 0);
+                    case 'files-desc': return (metaB.files || 0) - (metaA.files || 0);
+                    case 'duration-desc': return (metaB.duration || 0) - (metaA.duration || 0);
+                    case 'name-asc': return a.dataset.name.localeCompare(b.dataset.name);
+                    default: return 0;
+                }
+            });
+
+            datasets.forEach(d => container.appendChild(d));
+        }
+
+        function filterDatasets() {
+            const searchText = document.getElementById('filter-input').value.toLowerCase();
+            const activeFilters = Array.from(document.querySelectorAll('.filter-tag.active')).map(t => t.dataset.filter);
+            
+            document.querySelectorAll('.dataset').forEach(dataset => {
+                const name = dataset.dataset.name.toLowerCase();
+                const meta = datasetsMeta[dataset.dataset.name] || {};
+                const matchesSearch = name.includes(searchText);
+                const matchesFilter = activeFilters.length === 0 || activeFilters.includes(meta.rating);
+                dataset.classList.toggle('hidden', !(matchesSearch && matchesFilter));
+            });
+        }
+
+        function toggleFilterTag(element) {
+            element.classList.toggle('active');
+            filterDatasets();
         }
 
         function renderSummary(data) {
             let totalDatasets = Object.keys(data.datasets).length;
-            let totalFiles = 0;
-            let totalRows = 0;
-            let totalSize = 0;
+            let totalFiles = 0, totalRows = 0, avgScore = 0, scoreCount = 0;
 
-            for (const dataset of Object.values(data.datasets)) {
-                if (dataset.type === 'hierarchical') {
-                    totalFiles += dataset.total_csv_files || 0;
-                    // Estimate from categories
-                    for (const cat of Object.values(dataset.categories || {})) {
-                        if (cat.sample_analysis && !cat.sample_analysis.error) {
-                            totalRows += (cat.sample_analysis.total_rows || 0) * (cat.total_files_in_category || 1);
-                            totalSize += (cat.sample_analysis.memory_usage_mb || 0) * (cat.total_files_in_category || 1);
-                        }
-                    }
-                } else if (dataset.type === 'folder') {
-                    totalFiles += dataset.files_count || 0;
-                    for (const file of Object.values(dataset.files || {})) {
-                        if (!file.error) {
-                            totalRows += file.total_rows || 0;
-                            totalSize += file.memory_usage_mb || 0;
-                        }
-                    }
-                    // Count subfolder files
-                    for (const sub of Object.values(dataset.subfolders || {})) {
-                        totalFiles += sub.csv_count || 0;
-                        if (sub.sample_analysis && !sub.sample_analysis.error) {
-                            totalRows += (sub.sample_analysis.total_rows || 0) * (sub.csv_count || 1);
-                            totalSize += (sub.sample_analysis.memory_usage_mb || 0) * (sub.csv_count || 1);
-                        }
-                    }
-                } else {
-                    totalFiles += 1;
-                    if (!dataset.file_info?.error) {
-                        totalRows += dataset.file_info?.total_rows || 0;
-                        totalSize += dataset.file_info?.memory_usage_mb || 0;
-                    }
-                }
+            for (const [name, dataset] of Object.entries(data.datasets)) {
+                const meta = datasetsMeta[name];
+                totalFiles += meta.files || 0;
+                totalRows += meta.rows || 0;
+                if (meta.score > 0) { avgScore += meta.score; scoreCount++; }
             }
+
+            avgScore = scoreCount > 0 ? Math.round(avgScore / scoreCount) : 0;
 
             return `
                 <div class="summary-card">
@@ -997,11 +1035,11 @@
                 </div>
                 <div class="summary-card">
                     <div class="value">${formatNumber(totalRows)}</div>
-                    <div class="label">Est. Total Rows</div>
+                    <div class="label">Total Rows</div>
                 </div>
                 <div class="summary-card">
-                    <div class="value">${formatNumber(Math.round(totalSize))}</div>
-                    <div class="label">Est. Size (MB)</div>
+                    <div class="value" style="color: ${getScoreColor(avgScore)}">${avgScore}</div>
+                    <div class="label">Avg ML Score</div>
                 </div>
             `;
         }
@@ -1010,29 +1048,28 @@
             try {
                 const response = await fetch('datasets_statistics.json');
                 const data = await response.json();
-                
-                document.getElementById('generated-at').textContent = formatDate(data.generated_at) + ' ' + data.generated_at.split('T')[1]?.split('.')[0];
+                datasetsData = data.datasets;
+
+                for (const [name, dataset] of Object.entries(data.datasets)) {
+                    datasetsMeta[name] = extractDatasetMeta(name, dataset);
+                }
+
+                document.getElementById('generated-at').textContent = 
+                    formatDate(data.generated_at) + ' ' + (data.generated_at.split('T')[1]?.split('.')[0] || '');
                 document.getElementById('summary-grid').innerHTML = renderSummary(data);
-                
+
                 let html = '';
                 let index = 0;
                 for (const [name, dataset] of Object.entries(data.datasets)) {
                     html += renderDataset(name, dataset, index++);
                 }
-                
+
                 document.getElementById('datasets-container').innerHTML = html;
-                
-                // Auto-open first dataset
-                if (index > 0) {
-                    toggleDataset(0);
-                }
+                sortDatasets();
+
             } catch (error) {
-                document.getElementById('datasets-container').innerHTML = `
-                    <div class="error">
-                        <strong>Error loading data:</strong> ${error.message}<br><br>
-                        Make sure datasets_statistics.json is in the parent directory.
-                    </div>
-                `;
+                document.getElementById('datasets-container').innerHTML = 
+                    `<div class="error-box">Error loading data: ${error.message}</div>`;
             }
         }
 
