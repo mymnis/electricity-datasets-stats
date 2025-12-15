@@ -314,6 +314,158 @@
             color: #666;
         }
 
+        /* Predictive Analysis Styles */
+        .predictive-card {
+            border: 2px solid #000;
+            margin: 20px 0;
+            padding: 20px;
+        }
+
+        .predictive-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .predictive-header h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .score-badge {
+            font-size: 1.8rem;
+            font-weight: 200;
+            padding: 5px 15px;
+            border: 2px solid #000;
+        }
+
+        .score-badge.excellent { background: #000; color: #fff; }
+        .score-badge.good { background: #333; color: #fff; }
+        .score-badge.moderate { background: #666; color: #fff; }
+        .score-badge.poor { background: #f0f0f0; color: #000; }
+
+        .rating-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .score-item {
+            text-align: center;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+
+        .score-item .score-value {
+            font-size: 1.3rem;
+            font-weight: 300;
+        }
+
+        .score-item .score-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #666;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000;
+            font-size: 0.7rem;
+        }
+
+        .feature-icon.yes { background: #000; color: #fff; }
+        .feature-icon.no { background: #fff; color: #000; }
+
+        .recommendations {
+            background: #f5f5f5;
+            padding: 15px;
+            border-left: 3px solid #000;
+        }
+
+        .recommendations h5 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            font-size: 0.8rem;
+            padding: 5px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .recommendations li:last-child {
+            border-bottom: none;
+        }
+
+        .column-tags-section {
+            margin: 15px 0;
+        }
+
+        .column-tags-section h5 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .column-tag.energy {
+            border-color: #000;
+            background: #000;
+            color: #fff;
+        }
+
+        .column-tag.weather {
+            border-color: #444;
+            background: #444;
+            color: #fff;
+        }
+
+        .description-box {
+            background: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            border-left: 3px solid #666;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 20px;
@@ -339,16 +491,24 @@
 
     <div class="legend">
         <div class="legend-item">
+            <div class="legend-color" style="background: #000;"></div>
+            <span>Energy</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #444;"></div>
+            <span>Weather</span>
+        </div>
+        <div class="legend-item">
             <div class="legend-color datetime"></div>
-            <span>Datetime column</span>
+            <span>Datetime</span>
         </div>
         <div class="legend-item">
             <div class="legend-color metadata"></div>
-            <span>Metadata column</span>
+            <span>Metadata</span>
         </div>
         <div class="legend-item">
             <div class="legend-color numeric"></div>
-            <span>Numeric column</span>
+            <span>Numeric</span>
         </div>
         <div class="legend-item">
             <div class="legend-color other"></div>
@@ -377,11 +537,101 @@
             return dateStr.split('T')[0];
         }
 
-        function getColumnClass(colName, datetimeCols, metadataCols, dtype) {
-            if (datetimeCols && datetimeCols.includes(colName)) return 'datetime';
-            if (metadataCols && metadataCols.includes(colName)) return 'metadata';
-            if (dtype && (dtype.includes('int') || dtype.includes('float'))) return 'numeric';
+        function getColumnClass(colName, columnDetails) {
+            const details = columnDetails[colName];
+            const classification = details?.classification;
+            
+            if (classification === 'energy') return 'energy';
+            if (classification === 'weather') return 'weather';
+            if (classification === 'datetime') return 'datetime';
+            if (classification === 'metadata') return 'metadata';
+            if (details?.dtype && (details.dtype.includes('int') || details.dtype.includes('float'))) return 'numeric';
             return '';
+        }
+
+        function renderPredictiveAnalysis(predictive) {
+            if (!predictive) return '';
+            
+            const scores = predictive.scores || {};
+            const features = predictive.features || {};
+            const recommendations = predictive.recommendations || [];
+            
+            return `
+                <div class="predictive-card">
+                    <div class="predictive-header">
+                        <h4>⚡ Predictive Analysis Suitability</h4>
+                        <div>
+                            <div class="score-badge ${predictive.rating}">${predictive.overall_score}/100</div>
+                            <div class="rating-label">${predictive.rating}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <div class="score-value">${scores.energy_target || 0}/25</div>
+                            <div class="score-label">Energy Target</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-value">${scores.time_series_quality || 0}/30</div>
+                            <div class="score-label">Time Quality</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-value">${scores.exogenous_variables || 0}/15</div>
+                            <div class="score-label">Weather Data</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-value">${scores.dataset_size || 0}/15</div>
+                            <div class="score-label">Dataset Size</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-value">${scores.data_quality || 0}/10</div>
+                            <div class="score-label">Data Quality</div>
+                        </div>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon ${features.has_energy_target ? 'yes' : 'no'}">${features.has_energy_target ? '✓' : '✗'}</div>
+                            <span>Energy consumption column</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon ${features.has_weather_data ? 'yes' : 'no'}">${features.has_weather_data ? '✓' : '✗'}</div>
+                            <span>Weather/exogenous data</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon ${features.sufficient_duration ? 'yes' : 'no'}">${features.sufficient_duration ? '✓' : '✗'}</div>
+                            <span>Sufficient duration</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon ${features.multi_entity ? 'yes' : 'no'}">${features.multi_entity ? '✓' : '✗'}</div>
+                            <span>Multi-entity data</span>
+                        </div>
+                    </div>
+                    
+                    ${features.time_granularity ? `<div class="feature-item" style="margin-bottom: 15px;"><strong>Granularity:</strong> ${features.time_granularity} | <strong>Size:</strong> ${features.size_category || 'unknown'} | <strong>Avg nulls:</strong> ${features.avg_null_percentage || 0}%</div>` : ''}
+                    
+                    ${features.energy_columns?.length > 0 ? `
+                        <div class="column-tags-section">
+                            <h5>Energy columns</h5>
+                            <div class="column-list">${features.energy_columns.map(c => `<span class="column-tag energy">${c}</span>`).join('')}</div>
+                        </div>
+                    ` : ''}
+                    
+                    ${features.weather_columns?.length > 0 ? `
+                        <div class="column-tags-section">
+                            <h5>Weather columns</h5>
+                            <div class="column-list">${features.weather_columns.map(c => `<span class="column-tag weather">${c}</span>`).join('')}</div>
+                        </div>
+                    ` : ''}
+                    
+                    ${recommendations.length > 0 ? `
+                        <div class="recommendations">
+                            <h5>⚠ Recommendations</h5>
+                            <ul>${recommendations.map(r => `<li>${r}</li>`).join('')}</ul>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
         }
 
         function renderTimeInfo(timeAnalysis) {
@@ -408,6 +658,14 @@
                             <span class="label">Interval</span>
                             <span class="value">${info.median_interval}</span>
                         </div>
+                        <div class="time-item">
+                            <span class="label">Regularity</span>
+                            <span class="value">${info.regularity_score || '-'}%</span>
+                        </div>
+                        <div class="time-item">
+                            <span class="label">Gaps</span>
+                            <span class="value">${info.gap_percentage || 0}%</span>
+                        </div>
                     `;
                     break;
                 }
@@ -417,18 +675,18 @@
             return html;
         }
 
-        function renderColumns(columns, columnDetails, datetimeCols, metadataCols) {
+        function renderColumns(columns, columnDetails) {
             let html = '<div class="columns-section"><h4>Columns</h4><div class="column-list">';
             
             for (const col of columns) {
                 const details = columnDetails[col];
-                const colClass = getColumnClass(col, datetimeCols, metadataCols, details?.dtype);
+                const colClass = getColumnClass(col, columnDetails);
                 const nullPct = details?.null_percentage || 0;
                 let nullClass = 'good';
                 if (nullPct > 5) nullClass = 'warning';
                 if (nullPct > 20) nullClass = 'bad';
                 
-                html += `<span class="column-tag ${colClass}" title="${details?.dtype || ''}, ${nullPct}% null">${col}<span class="null-indicator ${nullClass}"></span></span>`;
+                html += `<span class="column-tag ${colClass}" title="${details?.classification || ''} | ${details?.dtype || ''} | ${nullPct}% null">${col}<span class="null-indicator ${nullClass}"></span></span>`;
             }
             
             html += '</div></div>';
@@ -486,8 +744,9 @@
                         <div class="label">Size (MB)</div>
                     </div>
                 </div>
+                ${renderPredictiveAnalysis(fileInfo.predictive_analysis)}
                 ${renderTimeInfo(fileInfo.time_analysis)}
-                ${renderColumns(fileInfo.columns, fileInfo.column_details, fileInfo.datetime_columns, fileInfo.potential_metadata_columns)}
+                ${renderColumns(fileInfo.columns, fileInfo.column_details)}
                 ${renderBarChart(fileInfo.column_details, fileInfo.columns)}
             `;
         }
@@ -496,12 +755,26 @@
             let content = '';
             let totalRows = 0;
             let totalCols = 0;
+            let bestScore = 0;
+            let bestRating = 'poor';
+            
+            // Add description if available
+            if (data.description) {
+                content += `<div class="description-box">${data.description}</div>`;
+            }
             
             if (data.type === 'folder') {
                 for (const [fileName, fileInfo] of Object.entries(data.files)) {
                     if (!fileInfo.error) {
                         totalRows += fileInfo.total_rows || 0;
                         totalCols = Math.max(totalCols, fileInfo.total_columns || 0);
+                        
+                        // Track best predictive score
+                        const score = fileInfo.predictive_analysis?.overall_score || 0;
+                        if (score > bestScore) {
+                            bestScore = score;
+                            bestRating = fileInfo.predictive_analysis?.rating || 'poor';
+                        }
                     }
                     content += `
                         <div class="file-section">
@@ -515,17 +788,20 @@
                 if (!fileInfo.error) {
                     totalRows = fileInfo.total_rows || 0;
                     totalCols = fileInfo.total_columns || 0;
+                    bestScore = fileInfo.predictive_analysis?.overall_score || 0;
+                    bestRating = fileInfo.predictive_analysis?.rating || 'poor';
                 }
-                content = renderFileStats(fileInfo);
+                content += renderFileStats(fileInfo);
             }
 
             const typeIcon = data.type === 'folder' ? '📁' : '📄';
             const filesCount = data.type === 'folder' ? ` (${data.files_count} files)` : '';
+            const scoreIndicator = bestScore > 0 ? `<span class="score-badge ${bestRating}" style="font-size: 1rem; padding: 2px 8px; margin-left: 15px;">${bestScore}</span>` : '';
 
             return `
                 <div class="dataset" data-index="${index}">
                     <div class="dataset-header" onclick="toggleDataset(${index})">
-                        <h2>${typeIcon} ${name}${filesCount}</h2>
+                        <h2>${typeIcon} ${name}${filesCount}${scoreIndicator}</h2>
                         <span class="toggle">+</span>
                     </div>
                     <div class="dataset-body">
