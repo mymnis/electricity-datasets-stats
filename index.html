@@ -96,7 +96,7 @@
         /* Summary Grid */
         .summary-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 15px;
             margin-bottom: 25px;
         }
@@ -685,7 +685,7 @@
         }
 
         function extractDatasetMeta(name, data) {
-            let score = 0, rating = 'poor', rows = 0, files = 0, duration = 0;
+            let score = 0, rating = 'poor', rows = 0, files = 0, duration = 0, sizeMb = 0;
 
             if (data.type === 'hierarchical') {
                 files = data.total_csv_files || 0;
@@ -697,6 +697,7 @@
                 for (const cat of Object.values(data.categories || {})) {
                     if (cat.sample_analysis && !cat.sample_analysis.error) {
                         rows += (cat.sample_analysis.total_rows || 0) * (cat.total_files_in_category || 1);
+                        sizeMb += (cat.sample_analysis.memory_usage_mb || 0) * (cat.total_files_in_category || 1);
                     }
                 }
             } else {
@@ -704,6 +705,7 @@
                 for (const file of Object.values(data.files || {})) {
                     if (!file.error) {
                         rows += file.total_rows || 0;
+                        sizeMb += file.memory_usage_mb || 0;
                         const fileScore = file.predictive_analysis?.overall_score || 0;
                         if (fileScore > score) {
                             score = fileScore;
@@ -720,6 +722,7 @@
                     files += sub.csv_count || 0;
                     if (sub.sample_analysis && !sub.sample_analysis.error) {
                         rows += (sub.sample_analysis.total_rows || 0) * (sub.csv_count || 1);
+                        sizeMb += (sub.sample_analysis.memory_usage_mb || 0) * (sub.csv_count || 1);
                         const subScore = sub.sample_analysis.predictive_analysis?.overall_score || 0;
                         if (subScore > score) {
                             score = subScore;
@@ -728,7 +731,7 @@
                     }
                 }
             }
-            return { name, score, rating, rows, files, duration };
+            return { name, score, rating, rows, files, duration, sizeMb };
         }
 
         function renderDatasetSummaryBar(meta) {
@@ -1109,16 +1112,25 @@
 
         function renderSummary(data) {
             let totalDatasets = Object.keys(data.datasets).length;
-            let totalFiles = 0, totalRows = 0, avgScore = 0, scoreCount = 0;
+            let totalFiles = 0, totalRows = 0, totalSizeMb = 0, avgScore = 0, scoreCount = 0;
 
             for (const [name, dataset] of Object.entries(data.datasets)) {
                 const meta = datasetsMeta[name];
                 totalFiles += meta.files || 0;
                 totalRows += meta.rows || 0;
+                totalSizeMb += meta.sizeMb || 0;
                 if (meta.score > 0) { avgScore += meta.score; scoreCount++; }
             }
 
             avgScore = scoreCount > 0 ? Math.round(avgScore / scoreCount) : 0;
+            
+            // Format size
+            let sizeStr;
+            if (totalSizeMb >= 1024) {
+                sizeStr = (totalSizeMb / 1024).toFixed(1) + ' GB';
+            } else {
+                sizeStr = totalSizeMb.toFixed(0) + ' MB';
+            }
 
             return `
                 <div class="summary-card">
@@ -1132,6 +1144,10 @@
                 <div class="summary-card">
                     <div class="value">${formatNumber(totalRows)}</div>
                     <div class="label">Total Rows</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">${sizeStr}</div>
+                    <div class="label">Total Size</div>
                 </div>
                 <div class="summary-card">
                     <div class="value" style="color: ${getScoreColor(avgScore)}">${avgScore}</div>
