@@ -840,7 +840,7 @@
 
             return `
                 <div class="file-card" data-file-index="${index}">
-                    <div class="file-card-header" onclick="toggleFileCard(${index})">
+                    <div class="file-card-header" onclick="toggleFileCard(event, ${index})">
                         <span class="file-card-name">
                             📄 ${fileName}
                             <span class="file-card-score" style="background: ${scoreColor}">${score}</span>
@@ -1037,7 +1037,7 @@
 
             return `
                 <div class="dataset" data-index="${index}" data-name="${name}" data-score="${meta.score}" data-rating="${meta.rating}">
-                    <div class="dataset-header" onclick="toggleDataset(this.parentElement)">
+                    <div class="dataset-header" onclick="toggleDataset(event, this.parentElement)">
                         <h2>
                             ${typeIcon} ${name}
                             <span class="file-card-score" style="background: ${scoreColor}; font-size: 0.8rem;">${meta.score}</span>
@@ -1051,11 +1051,15 @@
             `;
         }
 
-        function toggleDataset(element) {
+        function toggleDataset(event, element) {
+            event.preventDefault();
+            event.stopPropagation();
             element.classList.toggle('open');
         }
 
-        function toggleFileCard(index) {
+        function toggleFileCard(event, index) {
+            event.preventDefault();
+            event.stopPropagation();
             const card = document.querySelector(`.file-card[data-file-index="${index}"]`);
             if (card) card.classList.toggle('open');
         }
