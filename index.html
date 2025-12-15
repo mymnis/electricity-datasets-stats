@@ -975,8 +975,37 @@
             // Files section
             const files = Object.entries(data.files || {});
             const subfolders = Object.entries(data.subfolders || {});
+            const categories = Object.entries(data.categories || {});
             
-            if (files.length > 0 || subfolders.length > 0) {
+            // For hierarchical datasets - show categories
+            if (data.type === 'hierarchical' && categories.length > 0) {
+                content += `<div class="files-section">`;
+                content += `<div class="files-section-header">
+                    <h3>📂 Categories (${categories.length})</h3>
+                    <span class="files-toggle-all" onclick="toggleAllFiles(${index})">Expand All</span>
+                </div>`;
+                
+                let fileIndex = 0;
+                for (const [catName, catData] of categories) {
+                    if (catData.sample_analysis) {
+                        const filesInCat = catData.total_files_in_category || 0;
+                        content += renderFileCard(
+                            `📂 ${catName}/ (${filesInCat} files) — Sample: ${catData.sample_file || 'N/A'}`,
+                            catData.sample_analysis,
+                            index * 1000 + fileIndex++
+                        );
+                    }
+                }
+                
+                // Also show root files if any
+                for (const [fileName, fileInfo] of files) {
+                    content += renderFileCard(fileName, fileInfo, index * 1000 + fileIndex++);
+                }
+                
+                content += `</div>`;
+            }
+            // For regular datasets
+            else if (files.length > 0 || subfolders.length > 0) {
                 content += `<div class="files-section">`;
                 content += `<div class="files-section-header">
                     <h3>📁 Files (${files.length + subfolders.length})</h3>
