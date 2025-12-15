@@ -1055,16 +1055,22 @@
             event.preventDefault();
             event.stopPropagation();
             
-            // Remember element position relative to viewport
-            const rect = element.getBoundingClientRect();
-            const topBefore = rect.top;
-            
+            const wasOpen = element.classList.contains('open');
             element.classList.toggle('open');
             
-            // Restore position after DOM change
-            const topAfter = element.getBoundingClientRect().top;
-            if (topAfter !== topBefore) {
-                window.scrollBy(0, topAfter - topBefore);
+            // After collapsing, ensure the header stays visible
+            if (wasOpen) {
+                requestAnimationFrame(() => {
+                    const rect = element.getBoundingClientRect();
+                    // If header is above viewport, scroll to it
+                    if (rect.top < 0) {
+                        element.scrollIntoView({ block: 'start', behavior: 'instant' });
+                    }
+                    // If header is below viewport (rare), also scroll
+                    else if (rect.top > window.innerHeight - 60) {
+                        element.scrollIntoView({ block: 'center', behavior: 'instant' });
+                    }
+                });
             }
         }
 
@@ -1073,16 +1079,17 @@
             event.stopPropagation();
             const card = document.querySelector(`.file-card[data-file-index="${index}"]`);
             if (card) {
-                // Remember element position relative to viewport
-                const rect = card.getBoundingClientRect();
-                const topBefore = rect.top;
-                
+                const wasOpen = card.classList.contains('open');
                 card.classList.toggle('open');
                 
-                // Restore position after DOM change
-                const topAfter = card.getBoundingClientRect().top;
-                if (topAfter !== topBefore) {
-                    window.scrollBy(0, topAfter - topBefore);
+                // After collapsing, ensure the card stays visible
+                if (wasOpen) {
+                    requestAnimationFrame(() => {
+                        const rect = card.getBoundingClientRect();
+                        if (rect.top < 0) {
+                            card.scrollIntoView({ block: 'start', behavior: 'instant' });
+                        }
+                    });
                 }
             }
         }
