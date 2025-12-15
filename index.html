@@ -502,6 +502,58 @@
         .column-chip.datetime { background: #7b1fa2; color: #fff; border-color: #7b1fa2; }
         .column-chip.metadata { background: #388e3c; color: #fff; border-color: #388e3c; }
 
+        /* Data Preview Table */
+        .preview-section {
+            margin-top: 15px;
+        }
+
+        .preview-section h5 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .preview-table-wrapper {
+            overflow-x: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+        }
+
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            font-family: 'Consolas', monospace;
+        }
+
+        .preview-table th {
+            background: #f5f5f5;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 500;
+            border-bottom: 2px solid #ddd;
+            white-space: nowrap;
+        }
+
+        .preview-table td {
+            padding: 6px 10px;
+            border-bottom: 1px solid #eee;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .preview-table tr:hover td {
+            background: #f9f9f9;
+        }
+
+        .preview-table tr:last-child td {
+            border-bottom: none;
+        }
+
         /* Recommendations */
         .recommendations-compact {
             margin-top: 15px;
@@ -564,7 +616,7 @@
 <body>
     <header>
         <h1>⚡ Energy Dataset Analytics</h1>
-        <p class="meta">Generated: <span id="generated-at">-</span> | Predictive Analysis for ML Suitability</p>
+        <p class="meta">Predictive Analysis for ML Suitability</p>
     </header>
 
     <div class="controls">
@@ -866,6 +918,21 @@
                                 <ul>${recommendations.map(r => `<li>${r}</li>`).join('')}</ul>
                             </div>
                         ` : ''}
+                        ${fileInfo.preview && fileInfo.preview.length > 0 ? `
+                            <div class="preview-section">
+                                <h5>👁 Data Preview (first ${fileInfo.preview.length} rows)</h5>
+                                <div class="preview-table-wrapper">
+                                    <table class="preview-table">
+                                        <thead>
+                                            <tr>${(fileInfo.columns || []).map(c => `<th>${c}</th>`).join('')}</tr>
+                                        </thead>
+                                        <tbody>
+                                            ${fileInfo.preview.map(row => `<tr>${row.map(cell => `<td title="${String(cell).replace(/"/g, '&quot;')}">${cell}</td>`).join('')}</tr>`).join('')}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        ` : ''}
                     </div>
                 </div>
             `;
@@ -1054,8 +1121,6 @@
                     datasetsMeta[name] = extractDatasetMeta(name, dataset);
                 }
 
-                document.getElementById('generated-at').textContent = 
-                    formatDate(data.generated_at) + ' ' + (data.generated_at.split('T')[1]?.split('.')[0] || '');
                 document.getElementById('summary-grid').innerHTML = renderSummary(data);
 
                 let html = '';
