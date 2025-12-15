@@ -340,13 +340,11 @@
             font-size: 1.8rem;
             font-weight: 200;
             padding: 5px 15px;
-            border: 2px solid #000;
+            border: none;
+            color: #fff;
         }
 
-        .score-badge.excellent { background: #000; color: #fff; }
-        .score-badge.good { background: #333; color: #fff; }
-        .score-badge.moderate { background: #666; color: #fff; }
-        .score-badge.poor { background: #f0f0f0; color: #000; }
+        /* Score colors removed - now using dynamic JS colors */
 
         .rating-label {
             font-size: 0.7rem;
@@ -549,19 +547,47 @@
             return '';
         }
 
+        function getScoreColor(score) {
+            // Gradient from dark red (0) to green (100)
+            // 0 = #8B0000 (dark red)
+            // 50 = #FFA500 (orange)  
+            // 100 = #228B22 (forest green)
+            
+            score = Math.max(0, Math.min(100, score));
+            
+            let r, g, b;
+            
+            if (score <= 50) {
+                // Dark red to orange
+                const t = score / 50;
+                r = Math.round(139 + (255 - 139) * t);  // 139 -> 255
+                g = Math.round(0 + 165 * t);            // 0 -> 165
+                b = Math.round(0);                       // 0 -> 0
+            } else {
+                // Orange to green
+                const t = (score - 50) / 50;
+                r = Math.round(255 - (255 - 34) * t);   // 255 -> 34
+                g = Math.round(165 + (139 - 165) * t);  // 165 -> 139
+                b = Math.round(0 + 34 * t);             // 0 -> 34
+            }
+            
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
         function renderPredictiveAnalysis(predictive) {
             if (!predictive) return '';
             
             const scores = predictive.scores || {};
             const features = predictive.features || {};
             const recommendations = predictive.recommendations || [];
+            const scoreColor = getScoreColor(predictive.overall_score || 0);
             
             return `
                 <div class="predictive-card">
                     <div class="predictive-header">
                         <h4>⚡ Predictive Analysis Suitability</h4>
                         <div>
-                            <div class="score-badge ${predictive.rating}">${predictive.overall_score}/100</div>
+                            <div class="score-badge" style="background: ${scoreColor};">${predictive.overall_score}/100</div>
                             <div class="rating-label">${predictive.rating}</div>
                         </div>
                     </div>
@@ -751,6 +777,46 @@
             `;
         }
 
+        function renderCategoryInfo(categories) {
+            if (!categories || Object.keys(categories).length === 0) return '';
+            
+            let html = '<div class="categories-section"><h4 style="font-size: 0.85rem; text-transform: uppercase; margin-bottom: 15px;">📂 Data Categories</h4>';
+            html += '<div class="stats-row">';
+            
+            for (const [catName, catData] of Object.entries(categories)) {
+                const icon = catName === 'consumption' ? '⚡' : 
+                            catName === 'generation' ? '🔋' : 
+                            catName === 'climate' ? '🌡️' : 
+                            catName === 'distribution' ? '🔌' : '📁';
+                
+                html += `
+                    <div class="stat">
+                        <div class="value">${icon}</div>
+                        <div class="label">${catName}</div>
+                        <div style="font-size: 0.7rem; color: #666; margin-top: 5px;">
+                            ${catData.total_files_in_category || catData.folder_count || '?'} files
+                        </div>
+                    </div>
+                `;
+            }
+            html += '</div>';
+            
+            // Show sample analysis for each category
+            for (const [catName, catData] of Object.entries(categories)) {
+                if (catData.sample_analysis) {
+                    html += `
+                        <div class="file-section">
+                            <div class="file-name">Sample from ${catName}: ${catData.sample_file || 'sample.csv'}</div>
+                            ${renderFileStats(catData.sample_analysis)}
+                        </div>
+                    `;
+                }
+            }
+            
+            html += '</div>';
+            return html;
+        }
+
         function renderDataset(name, data, index) {
             let content = '';
             let totalRows = 0;
@@ -763,8 +829,50 @@
                 content += `<div class="description-box">${data.description}</div>`;
             }
             
-            if (data.type === 'folder') {
-                for (const [fileName, fileInfo] of Object.entries(data.files)) {
+            // Handle hierarchical datasets
+            if (data.type === 'hierarchical') {
+                // Show aggregated stats
+                const agg = data.aggregated_stats;
+                if (agg) {
+                    content += `
+                        <div class="stats-row">
+                            <div class="stat">
+                                <div class="value">${formatNumber(agg.total_csv_files)}</div>
+                                <div class="label">Total CSV Files</div>
+                            </div>
+                            <div class="stat">
+                                <div class="value">${agg.categories_found?.length || 0}</div>
+                                <div class="label">Categories</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Show aggregated predictive analysis
+                    if (agg.predictive_analysis) {
+                        bestScore = agg.predictive_analysis.overall_score || 0;
+                        bestRating = agg.predictive_analysis.rating || 'poor';
+                        content += renderPredictiveAnalysis(agg.predictive_analysis);
+                    }
+                }
+                
+                // Show categories
+                if (data.categories) {
+                    content += renderCategoryInfo(data.categories);
+                }
+                
+                // Show root files if any
+                if (data.files && Object.keys(data.files).length > 0) {
+                    for (const [fileName, fileInfo] of Object.entries(data.files)) {
+                        content += `
+                            <div class="file-section">
+                                <div class="file-name">📄 ${fileName}</div>
+                                ${renderFileStats(fileInfo)}
+                            </div>
+                        `;
+                    }
+                }
+            } else if (data.type === 'folder') {
+                for (const [fileName, fileInfo] of Object.entries(data.files || {})) {
                     if (!fileInfo.error) {
                         totalRows += fileInfo.total_rows || 0;
                         totalCols = Math.max(totalCols, fileInfo.total_columns || 0);
@@ -783,20 +891,41 @@
                         </div>
                     `;
                 }
+                
+                // Handle subfolders if present
+                if (data.subfolders) {
+                    for (const [subName, subData] of Object.entries(data.subfolders)) {
+                        if (subData.sample_analysis) {
+                            const score = subData.sample_analysis.predictive_analysis?.overall_score || 0;
+                            if (score > bestScore) {
+                                bestScore = score;
+                                bestRating = subData.sample_analysis.predictive_analysis?.rating || 'poor';
+                            }
+                            content += `
+                                <div class="file-section">
+                                    <div class="file-name">📁 ${subName}/ (${subData.csv_count} files) — sample: ${subData.sample_file}</div>
+                                    ${renderFileStats(subData.sample_analysis)}
+                                </div>
+                            `;
+                        }
+                    }
+                }
             } else {
                 const fileInfo = data.file_info;
-                if (!fileInfo.error) {
+                if (fileInfo && !fileInfo.error) {
                     totalRows = fileInfo.total_rows || 0;
                     totalCols = fileInfo.total_columns || 0;
                     bestScore = fileInfo.predictive_analysis?.overall_score || 0;
                     bestRating = fileInfo.predictive_analysis?.rating || 'poor';
                 }
-                content += renderFileStats(fileInfo);
+                if (fileInfo) content += renderFileStats(fileInfo);
             }
 
-            const typeIcon = data.type === 'folder' ? '📁' : '📄';
-            const filesCount = data.type === 'folder' ? ` (${data.files_count} files)` : '';
-            const scoreIndicator = bestScore > 0 ? `<span class="score-badge ${bestRating}" style="font-size: 1rem; padding: 2px 8px; margin-left: 15px;">${bestScore}</span>` : '';
+            const typeIcon = data.type === 'hierarchical' ? '🗂️' : data.type === 'folder' ? '📁' : '📄';
+            const filesCount = data.total_csv_files ? ` (${data.total_csv_files} files)` : 
+                              data.files_count ? ` (${data.files_count} files)` : '';
+            const headerScoreColor = getScoreColor(bestScore);
+            const scoreIndicator = bestScore > 0 ? `<span class="score-badge" style="font-size: 1rem; padding: 2px 8px; margin-left: 15px; background: ${headerScoreColor};">${bestScore}</span>` : '';
 
             return `
                 <div class="dataset" data-index="${index}">
@@ -823,12 +952,29 @@
             let totalSize = 0;
 
             for (const dataset of Object.values(data.datasets)) {
-                if (dataset.type === 'folder') {
-                    totalFiles += dataset.files_count;
-                    for (const file of Object.values(dataset.files)) {
+                if (dataset.type === 'hierarchical') {
+                    totalFiles += dataset.total_csv_files || 0;
+                    // Estimate from categories
+                    for (const cat of Object.values(dataset.categories || {})) {
+                        if (cat.sample_analysis && !cat.sample_analysis.error) {
+                            totalRows += (cat.sample_analysis.total_rows || 0) * (cat.total_files_in_category || 1);
+                            totalSize += (cat.sample_analysis.memory_usage_mb || 0) * (cat.total_files_in_category || 1);
+                        }
+                    }
+                } else if (dataset.type === 'folder') {
+                    totalFiles += dataset.files_count || 0;
+                    for (const file of Object.values(dataset.files || {})) {
                         if (!file.error) {
                             totalRows += file.total_rows || 0;
                             totalSize += file.memory_usage_mb || 0;
+                        }
+                    }
+                    // Count subfolder files
+                    for (const sub of Object.values(dataset.subfolders || {})) {
+                        totalFiles += sub.csv_count || 0;
+                        if (sub.sample_analysis && !sub.sample_analysis.error) {
+                            totalRows += (sub.sample_analysis.total_rows || 0) * (sub.csv_count || 1);
+                            totalSize += (sub.sample_analysis.memory_usage_mb || 0) * (sub.csv_count || 1);
                         }
                     }
                 } else {
@@ -846,16 +992,16 @@
                     <div class="label">Datasets</div>
                 </div>
                 <div class="summary-card">
-                    <div class="value">${totalFiles}</div>
+                    <div class="value">${formatNumber(totalFiles)}</div>
                     <div class="label">Files</div>
                 </div>
                 <div class="summary-card">
                     <div class="value">${formatNumber(totalRows)}</div>
-                    <div class="label">Total Rows</div>
+                    <div class="label">Est. Total Rows</div>
                 </div>
                 <div class="summary-card">
-                    <div class="value">${formatNumber(totalSize)}</div>
-                    <div class="label">Size (MB)</div>
+                    <div class="value">${formatNumber(Math.round(totalSize))}</div>
+                    <div class="label">Est. Size (MB)</div>
                 </div>
             `;
         }

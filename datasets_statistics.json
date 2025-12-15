@@ -1,15 +1,23 @@
 {
-  "generated_at": "2025-12-15T01:09:20.392686",
+  "generated_at": "2025-12-15T01:28:00.548144",
   "datasets": {
     "8 years of hourly heating and electricity consumption data- a residential building": {
       "name": "8 years of hourly heating and electricity consumption data- a residential building",
-      "path": "data\\8 years of hourly heating and electricity consumption data- a residential building",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\8 years of hourly heating and electricity consumption data- a residential building",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 1,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 1,
       "files": {
         "Load_data_new.csv": {
           "filename": "Load_data_new.csv",
-          "filepath": "data\\8 years of hourly heating and electricity consumption data- a residential building\\Load_data_new.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\8 years of hourly heating and electricity consumption data- a residential building\\Load_data_new.csv",
           "total_rows": 70080,
           "total_columns": 9,
           "columns": [
@@ -156,8 +164,8 @@
             "Time": {
               "median_interval": "1 hours",
               "median_interval_seconds": 3600.0,
-              "min_date": "2010-12-01 00:00:00",
-              "max_date": "2018-11-28 23:00:00",
+              "min_date": "2010-12-01 00:00:00+00:00",
+              "max_date": "2018-11-28 23:00:00+00:00",
               "date_range_days": 2919,
               "total_timestamps": 70080,
               "regularity_score": 100.0,
@@ -212,21 +220,763 @@
     },
     "Climate Energy Dataset For Off Grid Electricity Infrastructure": {
       "name": "Climate Energy Dataset For Off Grid Electricity Infrastructure",
-      "path": "data\\Climate Energy Dataset For Off Grid Electricity Infrastructure",
-      "type": "folder",
-      "files_count": 0,
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\Climate Energy Dataset For Off Grid Electricity Infrastructure",
+      "type": "hierarchical",
+      "structure": {
+        "type": "hierarchical",
+        "root_csv_count": 0,
+        "root_xlsx_count": 0,
+        "subdirectories": 4,
+        "subdir_patterns": {},
+        "categories": {
+          "climate": {
+            "folders": [
+              "Climate Data"
+            ],
+            "total_csvs": 0,
+            "has_nested": false
+          },
+          "consumption": {
+            "folders": [
+              "Consumption Data"
+            ],
+            "total_csvs": 0,
+            "has_nested": true
+          },
+          "distribution": {
+            "folders": [
+              "Distribution data"
+            ],
+            "total_csvs": 0,
+            "has_nested": true
+          },
+          "generation": {
+            "folders": [
+              "Generation Data"
+            ],
+            "total_csvs": 0,
+            "has_nested": true
+          }
+        }
+      },
+      "total_csv_files": 615,
+      "categories": {
+        "climate": {
+          "folder_count": 1,
+          "has_nested_structure": false,
+          "sample_analysis": null
+        },
+        "consumption": {
+          "folder_count": 1,
+          "has_nested_structure": true,
+          "sample_analysis": {
+            "filename": "SDBTR15DB05_ch1.csv",
+            "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Climate Energy Dataset For Off Grid Electricity Infrastructure\\Consumption Data\\consumer_device_10_data_user_1\\SDBTR15DB05_ch1.csv",
+            "total_rows": 22361,
+            "total_columns": 5,
+            "columns": [
+              "date_time",
+              "v_red",
+              "current",
+              "power_factor",
+              "kwh"
+            ],
+            "memory_usage_mb": 2.13,
+            "column_details": {
+              "date_time": {
+                "dtype": "object",
+                "non_null_count": 22361,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "datetime",
+                "unique_values": 22361
+              },
+              "v_red": {
+                "dtype": "float64",
+                "non_null_count": 22361,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 237.42,
+                "mean": 91.55834578060015,
+                "std": 93.823655207326,
+                "median": 84.57,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "current": {
+                "dtype": "float64",
+                "non_null_count": 22361,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 31.13,
+                "mean": 1.0838102052681007,
+                "std": 3.44529471057119,
+                "median": 0.0,
+                "outliers_count": 2547,
+                "outliers_percentage": 11.39
+              },
+              "power_factor": {
+                "dtype": "float64",
+                "non_null_count": 22361,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "energy",
+                "min": 0.0,
+                "max": 0.99,
+                "mean": 0.340527257278297,
+                "std": 0.37280990060259,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "kwh": {
+                "dtype": "float64",
+                "non_null_count": 22361,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "energy",
+                "min": 0.0,
+                "max": 0.4860711404999999,
+                "mean": 0.012654809178972298,
+                "std": 0.0418842511253448,
+                "median": 0.0,
+                "outliers_count": 2545,
+                "outliers_percentage": 11.38
+              }
+            },
+            "datetime_columns": [
+              "date_time"
+            ],
+            "time_analysis": {
+              "date_time": {
+                "median_interval": "5 minutes",
+                "median_interval_seconds": 300.0,
+                "min_date": "2024-07-22 18:20:00+00:00",
+                "max_date": "2024-10-08 09:40:00+00:00",
+                "date_range_days": 77,
+                "total_timestamps": 22361,
+                "regularity_score": 100.0,
+                "significant_gaps_count": 0,
+                "gap_percentage": 0.0
+              }
+            },
+            "predictive_analysis": {
+              "scores": {
+                "energy_target": 25,
+                "exogenous_variables": 0,
+                "time_series_quality": 20,
+                "data_quality": 10,
+                "dataset_size": 12,
+                "time_features": 0,
+                "metadata": 0
+              },
+              "features": {
+                "energy_columns": [
+                  "power_factor",
+                  "kwh"
+                ],
+                "has_energy_target": true,
+                "weather_columns": [],
+                "has_weather_data": false,
+                "sufficient_duration": false,
+                "time_granularity": "5 minutes",
+                "avg_null_percentage": 0.0,
+                "size_category": "medium",
+                "time_feature_columns": [],
+                "metadata_columns": [],
+                "multi_entity": false
+              },
+              "recommendations": [
+                "No weather data - consider joining with external weather dataset",
+                "Only 77 days of data - more history recommended"
+              ],
+              "overall_score": 67,
+              "rating": "good",
+              "rating_description": "Good for predictive analysis with minor preprocessing"
+            }
+          },
+          "sample_file": "Consumption Data\\consumer_device_10_data_user_1\\SDBTR15DB05_ch1.csv",
+          "total_files_in_category": 585
+        },
+        "distribution": {
+          "folder_count": 1,
+          "has_nested_structure": true,
+          "sample_analysis": {
+            "filename": "STBTR76.csv",
+            "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Climate Energy Dataset For Off Grid Electricity Infrastructure\\Distribution data\\distribution_10_data\\STBTR76.csv",
+            "total_rows": 84559,
+            "total_columns": 13,
+            "columns": [
+              "date_time",
+              "v_red",
+              "v_blue",
+              "v_yellow",
+              "i_red",
+              "i_blue",
+              "i_yellow",
+              "pf_red",
+              "pf_blue",
+              "pf_yellow",
+              "kWh_red",
+              "kWh_blue",
+              "kWh_yellow"
+            ],
+            "memory_usage_mb": 13.23,
+            "column_details": {
+              "date_time": {
+                "dtype": "object",
+                "non_null_count": 84559,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "datetime",
+                "unique_values": 84559
+              },
+              "v_red": {
+                "dtype": "float64",
+                "non_null_count": 84559,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 235.74,
+                "mean": 20.34181753568514,
+                "std": 49.44931409403338,
+                "median": 0.0,
+                "outliers_count": 13305,
+                "outliers_percentage": 15.73
+              },
+              "v_blue": {
+                "dtype": "float64",
+                "non_null_count": 84559,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 232.56,
+                "mean": 22.97831248004352,
+                "std": 56.48129826233821,
+                "median": 0.0,
+                "outliers_count": 13036,
+                "outliers_percentage": 15.42
+              },
+              "v_yellow": {
+                "dtype": "float64",
+                "non_null_count": 84559,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 233.58,
+                "mean": 20.07932937948651,
+                "std": 57.04965234248555,
+                "median": 0.0,
+                "outliers_count": 10359,
+                "outliers_percentage": 12.25
+              },
+              "i_red": {
+                "dtype": "float64",
+                "non_null_count": 84559,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 20.042,
+                "mean": 0.5770151255336509,
+                "std": 1.8828399051758813,
+                "median": 0.0,
+                "outliers_count": 11647,
+                "outliers_percentage": 13.77
+              },
+              "i_blue": {
+                "dtype": "float64",
+                "non_null_count": 84559,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 23.073,
+                "mean": 0.9253898224908054,
+                "std": 2.859360215257614,
+                "median": 0.0,
+                "outliers_count": 12088,
+                "outliers_percentage": 14.3
+              },
+              "i_yellow": {
+                "dtype": "float64",
+                "non_null_count": 84559,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 20.38,
+                "mean": 0.6039498101917005,
+                "std": 2.1061707156286213,
+                "median": 0.0,
+                "outliers_count": 9235,
+                "outliers_percentage": 10.92
+              },
+              "pf_red": {
+                "dtype": "float64",
+                "non_null_count": 84559,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 0.99,
+                "mean": 0.09870085975472745,
+                "std": 0.25630790292904637,
+                "median": 0.0,
+                "outliers_count": 11647,
+                "outliers_percentage": 13.77
+              },
+              "pf_blue": {
+                "dtype": "float64",
+                "non_null_count": 84559,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 0.99,
+                "mean": 0.09886420132688419,
+                "std": 0.2557025736359283,
+                "median": 0.0,
+                "outliers_count": 12088,
+                "outliers_percentage": 14.3
+              },
+              "pf_yellow": {
+                "dtype": "float64",
+                "non_null_count": 84559,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 0.99,
+                "mean": 0.0828216393287527,
+                "std": 0.24372327736084998,
+                "median": 0.0,
+                "outliers_count": 9235,
+                "outliers_percentage": 10.92
+              },
+              "kWh_red": {
+                "dtype": "float64",
+                "non_null_count": 84558,
+                "null_count": 1,
+                "null_percentage": 0.0,
+                "classification": "energy",
+                "min": 0.0,
+                "max": 0.3038944075566667,
+                "mean": 0.00505483005047911,
+                "std": 0.019607520858808614,
+                "median": 0.0,
+                "outliers_count": 11646,
+                "outliers_percentage": 13.77
+              },
+              "kWh_blue": {
+                "dtype": "float64",
+                "non_null_count": 84558,
+                "null_count": 1,
+                "null_percentage": 0.0,
+                "classification": "energy",
+                "min": 0.0,
+                "max": 0.37417248,
+                "mean": 0.008812033189749765,
+                "std": 0.030470480777157315,
+                "median": 0.0,
+                "outliers_count": 12087,
+                "outliers_percentage": 14.29
+              },
+              "kWh_yellow": {
+                "dtype": "float64",
+                "non_null_count": 84558,
+                "null_count": 1,
+                "null_percentage": 0.0,
+                "classification": "energy",
+                "min": 0.0,
+                "max": 0.2259055066666666,
+                "mean": 0.0066963206006958416,
+                "std": 0.023607709685429388,
+                "median": 0.0,
+                "outliers_count": 9235,
+                "outliers_percentage": 10.92
+              }
+            },
+            "datetime_columns": [
+              "date_time"
+            ],
+            "time_analysis": {
+              "date_time": {
+                "median_interval": "5 minutes",
+                "median_interval_seconds": 300.0,
+                "min_date": "2023-11-22 19:55:00+00:00",
+                "max_date": "2024-09-11 10:25:00+00:00",
+                "date_range_days": 293,
+                "total_timestamps": 84559,
+                "regularity_score": 100.0,
+                "significant_gaps_count": 0,
+                "gap_percentage": 0.0
+              }
+            },
+            "predictive_analysis": {
+              "scores": {
+                "energy_target": 25,
+                "exogenous_variables": 0,
+                "time_series_quality": 25,
+                "data_quality": 10,
+                "dataset_size": 12,
+                "time_features": 0,
+                "metadata": 0
+              },
+              "features": {
+                "energy_columns": [
+                  "kWh_red",
+                  "kWh_blue",
+                  "kWh_yellow"
+                ],
+                "has_energy_target": true,
+                "weather_columns": [],
+                "has_weather_data": false,
+                "sufficient_duration": true,
+                "time_granularity": "5 minutes",
+                "avg_null_percentage": 0.0,
+                "size_category": "medium",
+                "time_feature_columns": [],
+                "metadata_columns": [],
+                "multi_entity": false
+              },
+              "recommendations": [
+                "No weather data - consider joining with external weather dataset"
+              ],
+              "overall_score": 72,
+              "rating": "good",
+              "rating_description": "Good for predictive analysis with minor preprocessing"
+            }
+          },
+          "sample_file": "Distribution data\\distribution_10_data\\STBTR76.csv",
+          "total_files_in_category": 26
+        },
+        "generation": {
+          "folder_count": 1,
+          "has_nested_structure": true,
+          "sample_analysis": {
+            "filename": "I1F4.csv",
+            "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Climate Energy Dataset For Off Grid Electricity Infrastructure\\Generation Data\\Generator_1_data\\I1F4.csv",
+            "total_rows": 141857,
+            "total_columns": 13,
+            "columns": [
+              "date_time",
+              "v_red",
+              "v_blue",
+              "v_yellow",
+              "i_red",
+              "i_blue",
+              "i_yellow",
+              "pf_red",
+              "pf_blue",
+              "pf_yellow",
+              "kWh_red",
+              "kWh_blue",
+              "kWh_yellow"
+            ],
+            "memory_usage_mb": 21.72,
+            "column_details": {
+              "date_time": {
+                "dtype": "object",
+                "non_null_count": 141857,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "datetime",
+                "unique_values": 141857
+              },
+              "v_red": {
+                "dtype": "float64",
+                "non_null_count": 141857,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 239.502,
+                "mean": 70.16221762056156,
+                "std": 95.61204943603303,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "v_blue": {
+                "dtype": "float64",
+                "non_null_count": 141857,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 239.76,
+                "mean": 70.7305395362936,
+                "std": 96.3556465869291,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "v_yellow": {
+                "dtype": "float64",
+                "non_null_count": 141857,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 239.858,
+                "mean": 70.81423797909162,
+                "std": 96.52908104637683,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "i_red": {
+                "dtype": "float64",
+                "non_null_count": 141857,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 708.388,
+                "mean": 148.7630361067836,
+                "std": 237.6322905506041,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "i_blue": {
+                "dtype": "float64",
+                "non_null_count": 141857,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 705.48,
+                "mean": 148.68006172413067,
+                "std": 236.96138923014337,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "i_yellow": {
+                "dtype": "float64",
+                "non_null_count": 141857,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 702.136,
+                "mean": 135.4398702496176,
+                "std": 229.94996620300668,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "pf_red": {
+                "dtype": "float64",
+                "non_null_count": 141857,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 0.8,
+                "mean": 0.22396378747612034,
+                "std": 0.33918523150425883,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "pf_blue": {
+                "dtype": "float64",
+                "non_null_count": 141857,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 0.99,
+                "mean": 0.24222064473378122,
+                "std": 0.37015808856575044,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "pf_yellow": {
+                "dtype": "float64",
+                "non_null_count": 141857,
+                "null_count": 0,
+                "null_percentage": 0.0,
+                "classification": "numeric",
+                "min": 0.0,
+                "max": 0.99,
+                "mean": 0.264802047131971,
+                "std": 0.37141961102250354,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "kWh_red": {
+                "dtype": "float64",
+                "non_null_count": 141856,
+                "null_count": 1,
+                "null_percentage": 0.0,
+                "classification": "energy",
+                "min": 0.0,
+                "max": 9.177137249,
+                "mean": 1.8075985736515519,
+                "std": 2.9212179973240113,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "kWh_blue": {
+                "dtype": "float64",
+                "non_null_count": 141856,
+                "null_count": 1,
+                "null_percentage": 0.0,
+                "classification": "energy",
+                "min": 0.0,
+                "max": 10.5089796,
+                "mean": 1.971370047240623,
+                "std": 3.187445515559576,
+                "median": 0.0,
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
+              },
+              "kWh_yellow": {
+                "dtype": "float64",
+                "non_null_count": 141856,
+                "null_count": 1,
+                "null_percentage": 0.0,
+                "classification": "energy",
+                "min": 0.0,
+                "max": 10.71166551,
+                "mean": 1.7884463768625012,
+                "std": 3.059677659793007,
+                "median": 0.0,
+                "outliers_count": 525,
+                "outliers_percentage": 0.37
+              }
+            },
+            "datetime_columns": [
+              "date_time"
+            ],
+            "time_analysis": {
+              "date_time": {
+                "median_interval": "5 minutes",
+                "median_interval_seconds": 300.0,
+                "min_date": "2023-01-07 00:00:00+00:00",
+                "max_date": "2024-12-09 23:55:00+00:00",
+                "date_range_days": 702,
+                "total_timestamps": 141857,
+                "regularity_score": 0,
+                "significant_gaps_count": 22,
+                "gap_percentage": 0.02
+              }
+            },
+            "predictive_analysis": {
+              "scores": {
+                "energy_target": 25,
+                "exogenous_variables": 0,
+                "time_series_quality": 23,
+                "data_quality": 10,
+                "dataset_size": 15,
+                "time_features": 0,
+                "metadata": 0
+              },
+              "features": {
+                "energy_columns": [
+                  "kWh_red",
+                  "kWh_blue",
+                  "kWh_yellow"
+                ],
+                "has_energy_target": true,
+                "weather_columns": [],
+                "has_weather_data": false,
+                "sufficient_duration": true,
+                "time_granularity": "5 minutes",
+                "avg_null_percentage": 0.0,
+                "size_category": "large",
+                "time_feature_columns": [],
+                "metadata_columns": [],
+                "multi_entity": false
+              },
+              "recommendations": [
+                "No weather data - consider joining with external weather dataset",
+                "Irregular time intervals (regularity: 0%) - may need resampling"
+              ],
+              "overall_score": 73,
+              "rating": "good",
+              "rating_description": "Good for predictive analysis with minor preprocessing"
+            }
+          },
+          "sample_file": "Generation Data\\Generator_1_data\\I1F4.csv",
+          "total_files_in_category": 4
+        }
+      },
       "files": {},
+      "aggregated_stats": {
+        "total_csv_files": 615,
+        "categories_found": [
+          "climate",
+          "consumption",
+          "distribution",
+          "generation"
+        ],
+        "predictive_analysis": {
+          "scores": {
+            "energy_target": 25,
+            "exogenous_variables": 15,
+            "metadata": 5,
+            "time_series_quality": 10,
+            "dataset_size": 15,
+            "data_quality": 10,
+            "completeness_bonus": 5
+          },
+          "features": {
+            "has_energy_target": true,
+            "energy_categories": [
+              "consumption",
+              "generation"
+            ],
+            "has_weather_data": true,
+            "total_entities": 615,
+            "multi_entity": true,
+            "time_granularity": "5 minutes",
+            "date_range_days": 77,
+            "size_category": "large",
+            "avg_null_percentage": 0.0,
+            "comprehensive_dataset": true
+          },
+          "recommendations": [
+            "Consider longer time period for robust predictions"
+          ],
+          "overall_score": 85,
+          "rating": "excellent",
+          "rating_description": "Highly suitable for predictive analysis"
+        }
+      },
       "description": "The dataset comprises real-time electrical measurements—including voltages, currents, and power factors—for three-phase and single-phase systems across generation, distribution, and consumption stages showcasing the energy generation and demand within an off-grid electricity infrastructure located in the Kalam Region, a specific climate zone in Pakistan. Collected every five minutes from March 6, 2023, to October 24, 2024, it includes over 45 million instances covering data from four micro-hydropower generators, 26 transformers, and 585 end-users. Additionally, the dataset incorporates climate data—such as temperature, dew point, wind components, precipitation, snowfall, and snow cover—from the ERA5 dataset. This comprehensive collection enhances its utility for research in energy systems analysis, climate change studies, electrical engineering, and artificial intelligence applications.\n\nThis dataset was originally created with support from Lacuna Fund, the world’s first collaborative effort to provide data scientists, researchers, and social entrepreneurs in low- and middle-income contexts globally with the resources they need to produce labeled datasets that address urgent problems in their communities. Lacuna Fund is a funder collaborative that includes The Rockefeller Foundation, Google.org, Canada’s International Development Research Centre, the German Federal Ministry for Economic Cooperation and Development (BMZ) with GIZ as implementing agency, Wellcome Trust, Gordon and Betty Moore Foundation, Patrick J. McGovern Foundation, and The Robert Wood Johnson Foundation. See https://lacunafund.org/about/ for more information."
     },
     "climate-and-energy-consumption-dataset-20202024": {
       "name": "climate-and-energy-consumption-dataset-20202024",
-      "path": "data\\climate-and-energy-consumption-dataset-20202024",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\climate-and-energy-consumption-dataset-20202024",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 1,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 1,
       "files": {
         "global_climate_energy_2020_2024.csv": {
           "filename": "global_climate_energy_2020_2024.csv",
-          "filepath": "data\\climate-and-energy-consumption-dataset-20202024\\global_climate_energy_2020_2024.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\climate-and-energy-consumption-dataset-20202024\\global_climate_energy_2020_2024.csv",
           "total_rows": 36540,
           "total_columns": 10,
           "columns": [
@@ -401,8 +1151,8 @@
             "date": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2020-01-01 00:00:00",
-              "max_date": "2024-12-31 00:00:00",
+              "min_date": "2020-01-01 00:00:00+00:00",
+              "max_date": "2024-12-31 00:00:00+00:00",
               "date_range_days": 1826,
               "total_timestamps": 36540,
               "regularity_score": 0,
@@ -456,13 +1206,21 @@
     },
     "Electricity consumption UK 2009-2024": {
       "name": "Electricity consumption UK 2009-2024",
-      "path": "data\\Electricity consumption UK 2009-2024",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 18,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 18,
       "files": {
         "historic_demand_2009_2024.csv": {
           "filename": "historic_demand_2009_2024.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_2009_2024.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_2009_2024.csv",
           "total_rows": 279264,
           "total_columns": 24,
           "columns": [
@@ -831,8 +1589,8 @@
             "settlement_date": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2009-01-01 00:00:00",
-              "max_date": "2024-12-05 00:00:00",
+              "min_date": "2009-01-01 00:00:00+00:00",
+              "max_date": "2024-12-05 00:00:00+00:00",
               "date_range_days": 5817,
               "total_timestamps": 279264,
               "regularity_score": 0,
@@ -885,7 +1643,7 @@
         },
         "historic_demand_2009_2024_noNaN.csv": {
           "filename": "historic_demand_2009_2024_noNaN.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_2009_2024_noNaN.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_2009_2024_noNaN.csv",
           "total_rows": 278512,
           "total_columns": 19,
           "columns": [
@@ -1174,8 +1932,8 @@
             "settlement_date": {
               "median_interval": "30 minutes",
               "median_interval_seconds": 1800.0,
-              "min_date": "2009-01-01 00:00:00",
-              "max_date": "2024-12-05 23:30:00",
+              "min_date": "2009-01-01 00:00:00+00:00",
+              "max_date": "2024-12-05 23:30:00+00:00",
               "date_range_days": 5817,
               "total_timestamps": 278512,
               "regularity_score": 27.8,
@@ -1185,8 +1943,8 @@
             "period_hour": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2025-12-15 00:00:00",
-              "max_date": "2025-12-15 23:30:00",
+              "min_date": "2025-12-15 00:00:00+00:00",
+              "max_date": "2025-12-15 23:30:00+00:00",
               "date_range_days": 0,
               "total_timestamps": 278512,
               "regularity_score": 0,
@@ -1240,7 +1998,7 @@
         },
         "historic_demand_year_2009.csv": {
           "filename": "historic_demand_year_2009.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2009.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2009.csv",
           "total_rows": 17520,
           "total_columns": 17,
           "columns": [
@@ -1504,8 +2262,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2009-01-01 00:00:00",
-              "max_date": "2009-12-31 00:00:00",
+              "min_date": "2009-01-01 00:00:00+00:00",
+              "max_date": "2009-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -1553,7 +2311,7 @@
         },
         "historic_demand_year_2010.csv": {
           "filename": "historic_demand_year_2010.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2010.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2010.csv",
           "total_rows": 17520,
           "total_columns": 17,
           "columns": [
@@ -1817,8 +2575,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2010-01-01 00:00:00",
-              "max_date": "2010-12-31 00:00:00",
+              "min_date": "2010-01-01 00:00:00+00:00",
+              "max_date": "2010-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -1866,7 +2624,7 @@
         },
         "historic_demand_year_2011.csv": {
           "filename": "historic_demand_year_2011.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2011.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2011.csv",
           "total_rows": 17520,
           "total_columns": 17,
           "columns": [
@@ -2130,8 +2888,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2011-01-01 00:00:00",
-              "max_date": "2011-12-31 00:00:00",
+              "min_date": "2011-01-01 00:00:00+00:00",
+              "max_date": "2011-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -2179,7 +2937,7 @@
         },
         "historic_demand_year_2012.csv": {
           "filename": "historic_demand_year_2012.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2012.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2012.csv",
           "total_rows": 17568,
           "total_columns": 17,
           "columns": [
@@ -2443,8 +3201,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2012-01-01 00:00:00",
-              "max_date": "2012-12-31 00:00:00",
+              "min_date": "2012-01-01 00:00:00+00:00",
+              "max_date": "2012-12-31 00:00:00+00:00",
               "date_range_days": 365,
               "total_timestamps": 17568,
               "regularity_score": 0,
@@ -2492,7 +3250,7 @@
         },
         "historic_demand_year_2013.csv": {
           "filename": "historic_demand_year_2013.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2013.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2013.csv",
           "total_rows": 17520,
           "total_columns": 17,
           "columns": [
@@ -2756,8 +3514,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2013-01-01 00:00:00",
-              "max_date": "2013-12-31 00:00:00",
+              "min_date": "2013-01-01 00:00:00+00:00",
+              "max_date": "2013-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -2805,7 +3563,7 @@
         },
         "historic_demand_year_2014.csv": {
           "filename": "historic_demand_year_2014.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2014.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2014.csv",
           "total_rows": 17520,
           "total_columns": 17,
           "columns": [
@@ -3069,8 +3827,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2014-01-01 00:00:00",
-              "max_date": "2014-12-31 00:00:00",
+              "min_date": "2014-01-01 00:00:00+00:00",
+              "max_date": "2014-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -3118,7 +3876,7 @@
         },
         "historic_demand_year_2015.csv": {
           "filename": "historic_demand_year_2015.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2015.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2015.csv",
           "total_rows": 17520,
           "total_columns": 17,
           "columns": [
@@ -3382,8 +4140,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2015-01-01 00:00:00",
-              "max_date": "2015-12-31 00:00:00",
+              "min_date": "2015-01-01 00:00:00+00:00",
+              "max_date": "2015-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -3431,7 +4189,7 @@
         },
         "historic_demand_year_2016.csv": {
           "filename": "historic_demand_year_2016.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2016.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2016.csv",
           "total_rows": 17568,
           "total_columns": 17,
           "columns": [
@@ -3695,8 +4453,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2016-01-01 00:00:00",
-              "max_date": "2016-12-31 00:00:00",
+              "min_date": "2016-01-01 00:00:00+00:00",
+              "max_date": "2016-12-31 00:00:00+00:00",
               "date_range_days": 365,
               "total_timestamps": 17568,
               "regularity_score": 0,
@@ -3744,7 +4502,7 @@
         },
         "historic_demand_year_2017.csv": {
           "filename": "historic_demand_year_2017.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2017.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2017.csv",
           "total_rows": 17520,
           "total_columns": 17,
           "columns": [
@@ -4008,8 +4766,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2017-01-01 00:00:00",
-              "max_date": "2017-12-31 00:00:00",
+              "min_date": "2017-01-01 00:00:00+00:00",
+              "max_date": "2017-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -4057,7 +4815,7 @@
         },
         "historic_demand_year_2018.csv": {
           "filename": "historic_demand_year_2018.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2018.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2018.csv",
           "total_rows": 17520,
           "total_columns": 17,
           "columns": [
@@ -4321,8 +5079,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2018-01-01 00:00:00",
-              "max_date": "2018-12-31 00:00:00",
+              "min_date": "2018-01-01 00:00:00+00:00",
+              "max_date": "2018-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -4370,7 +5128,7 @@
         },
         "historic_demand_year_2019.csv": {
           "filename": "historic_demand_year_2019.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2019.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2019.csv",
           "total_rows": 17520,
           "total_columns": 19,
           "columns": [
@@ -4664,8 +5422,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2019-01-01 00:00:00",
-              "max_date": "2019-12-31 00:00:00",
+              "min_date": "2019-01-01 00:00:00+00:00",
+              "max_date": "2019-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -4713,7 +5471,7 @@
         },
         "historic_demand_year_2020.csv": {
           "filename": "historic_demand_year_2020.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2020.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2020.csv",
           "total_rows": 17568,
           "total_columns": 19,
           "columns": [
@@ -5007,8 +5765,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2020-01-01 00:00:00",
-              "max_date": "2020-12-31 00:00:00",
+              "min_date": "2020-01-01 00:00:00+00:00",
+              "max_date": "2020-12-31 00:00:00+00:00",
               "date_range_days": 365,
               "total_timestamps": 17568,
               "regularity_score": 0,
@@ -5056,7 +5814,7 @@
         },
         "historic_demand_year_2021.csv": {
           "filename": "historic_demand_year_2021.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2021.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2021.csv",
           "total_rows": 17520,
           "total_columns": 19,
           "columns": [
@@ -5350,8 +6108,8 @@
             "SETTLEMENT_DATE": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2021-01-01 00:00:00",
-              "max_date": "2021-12-31 00:00:00",
+              "min_date": "2021-01-01 00:00:00+00:00",
+              "max_date": "2021-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -5399,7 +6157,7 @@
         },
         "historic_demand_year_2022.csv": {
           "filename": "historic_demand_year_2022.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2022.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2022.csv",
           "total_rows": 17520,
           "total_columns": 19,
           "columns": [
@@ -5693,8 +6451,8 @@
             "settlement_date": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2022-01-01 00:00:00",
-              "max_date": "2022-12-31 00:00:00",
+              "min_date": "2022-01-01 00:00:00+00:00",
+              "max_date": "2022-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -5742,7 +6500,7 @@
         },
         "historic_demand_year_2023.csv": {
           "filename": "historic_demand_year_2023.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2023.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2023.csv",
           "total_rows": 17520,
           "total_columns": 21,
           "columns": [
@@ -6066,8 +6824,8 @@
             "settlement_date": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2023-01-01 00:00:00",
-              "max_date": "2023-12-31 00:00:00",
+              "min_date": "2023-01-01 00:00:00+00:00",
+              "max_date": "2023-12-31 00:00:00+00:00",
               "date_range_days": 364,
               "total_timestamps": 17520,
               "regularity_score": 0,
@@ -6115,7 +6873,7 @@
         },
         "historic_demand_year_2024.csv": {
           "filename": "historic_demand_year_2024.csv",
-          "filepath": "data\\Electricity consumption UK 2009-2024\\historic_demand_year_2024.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Electricity consumption UK 2009-2024\\historic_demand_year_2024.csv",
           "total_rows": 16320,
           "total_columns": 22,
           "columns": [
@@ -6454,8 +7212,8 @@
             "settlement_date": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2024-01-01 00:00:00",
-              "max_date": "2024-12-05 00:00:00",
+              "min_date": "2024-01-01 00:00:00+00:00",
+              "max_date": "2024-12-05 00:00:00+00:00",
               "date_range_days": 339,
               "total_timestamps": 16320,
               "regularity_score": 0,
@@ -6506,13 +7264,21 @@
     },
     "electricity-smart-meter-data-from-india": {
       "name": "electricity-smart-meter-data-from-india",
-      "path": "data\\electricity-smart-meter-data-from-india",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\electricity-smart-meter-data-from-india",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 8,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 8,
       "files": {
         "CEEW - Smart meter data Bareilly 2020.csv": {
           "filename": "CEEW - Smart meter data Bareilly 2020.csv",
-          "filepath": "data\\electricity-smart-meter-data-from-india\\CEEW - Smart meter data Bareilly 2020.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\electricity-smart-meter-data-from-india\\CEEW - Smart meter data Bareilly 2020.csv",
           "total_rows": 6627360,
           "total_columns": 6,
           "columns": [
@@ -6605,8 +7371,8 @@
             "x_Timestamp": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2020-01-01 00:00:00",
-              "max_date": "2020-12-31 23:57:00",
+              "min_date": "2020-01-01 00:00:00+00:00",
+              "max_date": "2020-12-31 23:57:00+00:00",
               "date_range_days": 365,
               "total_timestamps": 6627360,
               "regularity_score": 0,
@@ -6654,7 +7420,7 @@
         },
         "CEEW - Smart meter data Bareilly 2021.csv": {
           "filename": "CEEW - Smart meter data Bareilly 2021.csv",
-          "filepath": "data\\electricity-smart-meter-data-from-india\\CEEW - Smart meter data Bareilly 2021.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\electricity-smart-meter-data-from-india\\CEEW - Smart meter data Bareilly 2021.csv",
           "total_rows": 3948960,
           "total_columns": 6,
           "columns": [
@@ -6747,8 +7513,8 @@
             "x_Timestamp": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2021-01-01 00:00:00",
-              "max_date": "2021-10-31 23:57:00",
+              "min_date": "2021-01-01 00:00:00+00:00",
+              "max_date": "2021-10-31 23:57:00+00:00",
               "date_range_days": 303,
               "total_timestamps": 3948960,
               "regularity_score": 0,
@@ -6796,7 +7562,7 @@
         },
         "CEEW - Smart meter data Mathura 2019.csv": {
           "filename": "CEEW - Smart meter data Mathura 2019.csv",
-          "filepath": "data\\electricity-smart-meter-data-from-india\\CEEW - Smart meter data Mathura 2019.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\electricity-smart-meter-data-from-india\\CEEW - Smart meter data Mathura 2019.csv",
           "total_rows": 3588874,
           "total_columns": 6,
           "columns": [
@@ -6889,8 +7655,8 @@
             "x_Timestamp": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2019-05-01 00:00:00",
-              "max_date": "2019-12-31 23:57:00",
+              "min_date": "2019-05-01 00:00:00+00:00",
+              "max_date": "2019-12-31 23:57:00+00:00",
               "date_range_days": 244,
               "total_timestamps": 3588874,
               "regularity_score": 0,
@@ -6938,7 +7704,7 @@
         },
         "CEEW - Smart meter data Mathura 2020.csv": {
           "filename": "CEEW - Smart meter data Mathura 2020.csv",
-          "filepath": "data\\electricity-smart-meter-data-from-india\\CEEW - Smart meter data Mathura 2020.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\electricity-smart-meter-data-from-india\\CEEW - Smart meter data Mathura 2020.csv",
           "total_rows": 3759360,
           "total_columns": 6,
           "columns": [
@@ -7031,8 +7797,8 @@
             "x_Timestamp": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2020-01-01 00:00:00",
-              "max_date": "2020-12-31 23:57:00",
+              "min_date": "2020-01-01 00:00:00+00:00",
+              "max_date": "2020-12-31 23:57:00+00:00",
               "date_range_days": 365,
               "total_timestamps": 3759360,
               "regularity_score": 0,
@@ -7080,7 +7846,7 @@
         },
         "SM Cleaned Data BR Aggregated.csv": {
           "filename": "SM Cleaned Data BR Aggregated.csv",
-          "filepath": "data\\electricity-smart-meter-data-from-india\\SM Cleaned Data BR Aggregated.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\electricity-smart-meter-data-from-india\\SM Cleaned Data BR Aggregated.csv",
           "total_rows": 28119,
           "total_columns": 3,
           "columns": [
@@ -7128,8 +7894,8 @@
             "Date": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2019-05-09 00:00:00",
-              "max_date": "2021-10-31 00:00:00",
+              "min_date": "2019-05-09 00:00:00+00:00",
+              "max_date": "2021-10-31 00:00:00+00:00",
               "date_range_days": 906,
               "total_timestamps": 28119,
               "regularity_score": 0,
@@ -7177,7 +7943,7 @@
         },
         "SM Cleaned Data BR2019.csv": {
           "filename": "SM Cleaned Data BR2019.csv",
-          "filepath": "data\\electricity-smart-meter-data-from-india\\SM Cleaned Data BR2019.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\electricity-smart-meter-data-from-india\\SM Cleaned Data BR2019.csv",
           "total_rows": 2919315,
           "total_columns": 6,
           "columns": [
@@ -7270,8 +8036,8 @@
             "x_Timestamp": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2019-05-09 00:00:00",
-              "max_date": "2019-12-31 23:57:00",
+              "min_date": "2019-05-09 00:00:00+00:00",
+              "max_date": "2019-12-31 23:57:00+00:00",
               "date_range_days": 236,
               "total_timestamps": 2919315,
               "regularity_score": 0,
@@ -7319,7 +8085,7 @@
         },
         "SM Cleaned Data MH Aggregated.csv": {
           "filename": "SM Cleaned Data MH Aggregated.csv",
-          "filepath": "data\\electricity-smart-meter-data-from-india\\SM Cleaned Data MH Aggregated.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\electricity-smart-meter-data-from-india\\SM Cleaned Data MH Aggregated.csv",
           "total_rows": 16491,
           "total_columns": 3,
           "columns": [
@@ -7367,8 +8133,8 @@
             "Date": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2019-05-01 00:00:00",
-              "max_date": "2021-02-20 00:00:00",
+              "min_date": "2019-05-01 00:00:00+00:00",
+              "max_date": "2021-02-20 00:00:00+00:00",
               "date_range_days": 661,
               "total_timestamps": 16491,
               "regularity_score": 0,
@@ -7416,7 +8182,7 @@
         },
         "SM Cleaned Data MH2021.csv": {
           "filename": "SM Cleaned Data MH2021.csv",
-          "filepath": "data\\electricity-smart-meter-data-from-india\\SM Cleaned Data MH2021.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\electricity-smart-meter-data-from-india\\SM Cleaned Data MH2021.csv",
           "total_rows": 550560,
           "total_columns": 6,
           "columns": [
@@ -7509,8 +8275,8 @@
             "x_Timestamp": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2021-01-01 00:00:00",
-              "max_date": "2021-02-20 23:57:00",
+              "min_date": "2021-01-01 00:00:00+00:00",
+              "max_date": "2021-02-20 23:57:00+00:00",
               "date_range_days": 50,
               "total_timestamps": 550560,
               "regularity_score": 0,
@@ -7562,26 +8328,42 @@
     },
     "Energy Consumption Time Series": {
       "name": "Energy Consumption Time Series",
-      "path": "data\\Energy Consumption Time Series",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\Energy Consumption Time Series",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 1,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 1,
       "files": {
         "energy-consumption-time-series.csv": {
           "error": "numpy boolean subtract, the `-` operator, is not supported, use the bitwise_xor, the `^` operator, or the logical_xor function instead.",
-          "filepath": "data\\Energy Consumption Time Series\\energy-consumption-time-series.csv"
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Energy Consumption Time Series\\energy-consumption-time-series.csv"
         }
       },
       "description": "This dataset provides detailed, hourly electricity consumption records for both commercial and residential consumers, enriched with contextual information such as region, temperature, and holiday indicators. It is ideal for utility companies and researchers seeking to perform load forecasting, demand analysis, and anomaly detection at a granular level."
     },
     "Household energy consumption with weather data": {
       "name": "Household energy consumption with weather data",
-      "path": "data\\Household energy consumption with weather data",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\Household energy consumption with weather data",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 1,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 1,
       "files": {
         "energy_weather_raw_data.csv": {
           "filename": "energy_weather_raw_data.csv",
-          "filepath": "data\\Household energy consumption with weather data\\energy_weather_raw_data.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Household energy consumption with weather data\\energy_weather_raw_data.csv",
           "total_rows": 605260,
           "total_columns": 19,
           "columns": [
@@ -7891,8 +8673,8 @@
             "date": {
               "median_interval": "1 minutes",
               "median_interval_seconds": 60.0,
-              "min_date": "2022-11-05 14:05:00",
-              "max_date": "2024-01-05 23:59:00",
+              "min_date": "2022-11-05 14:05:00+00:00",
+              "max_date": "2024-01-05 23:59:00+00:00",
               "date_range_days": 426,
               "total_timestamps": 605260,
               "regularity_score": 0,
@@ -7952,13 +8734,21 @@
     },
     "Personal Electricity Consumption and Weather": {
       "name": "Personal Electricity Consumption and Weather",
-      "path": "data\\Personal Electricity Consumption and Weather",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\Personal Electricity Consumption and Weather",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 1,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 1,
       "files": {
         "weather-energy-data-update.csv": {
           "filename": "weather-energy-data-update.csv",
-          "filepath": "data\\Personal Electricity Consumption and Weather\\weather-energy-data-update.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Personal Electricity Consumption and Weather\\weather-energy-data-update.csv",
           "total_rows": 26328,
           "total_columns": 18,
           "columns": [
@@ -8237,8 +9027,8 @@
             "Datetime": {
               "median_interval": "1 hours",
               "median_interval_seconds": 3600.0,
-              "min_date": "2018-11-01 00:00:00",
-              "max_date": "2021-11-01 23:00:00",
+              "min_date": "2018-11-01 00:00:00+00:00",
+              "max_date": "2021-11-01 23:00:00+00:00",
               "date_range_days": 1096,
               "total_timestamps": 26328,
               "regularity_score": 100.0,
@@ -8298,13 +9088,21 @@
     },
     "Renewable Energy and Electricity Demand Time Series Dataset with Exogenous Variables at 5-minute Interval": {
       "name": "Renewable Energy and Electricity Demand Time Series Dataset with Exogenous Variables at 5-minute Interval",
-      "path": "data\\Renewable Energy and Electricity Demand Time Series Dataset with Exogenous Variables at 5-minute Interval",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\Renewable Energy and Electricity Demand Time Series Dataset with Exogenous Variables at 5-minute Interval",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 1,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 1,
       "files": {
         "renewable_energy_and_electricity_demand_time_series_dataset_with_exogenous_variables_at_5_minute_interval.csv": {
           "filename": "renewable_energy_and_electricity_demand_time_series_dataset_with_exogenous_variables_at_5_minute_interval.csv",
-          "filepath": "data\\Renewable Energy and Electricity Demand Time Series Dataset with Exogenous Variables at 5-minute Interval\\renewable_energy_and_electricity_demand_time_series_dataset_with_exogenous_variables_at_5_minute_interval.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Renewable Energy and Electricity Demand Time Series Dataset with Exogenous Variables at 5-minute Interval\\renewable_energy_and_electricity_demand_time_series_dataset_with_exogenous_variables_at_5_minute_interval.csv",
           "total_rows": 315648,
           "total_columns": 13,
           "columns": [
@@ -8508,8 +9306,8 @@
             "Time": {
               "median_interval": "5 minutes",
               "median_interval_seconds": 300.0,
-              "min_date": "2019-01-01 00:00:00",
-              "max_date": "2021-12-31 23:55:00",
+              "min_date": "2019-01-01 00:00:00+00:00",
+              "max_date": "2021-12-31 23:55:00+00:00",
               "date_range_days": 1095,
               "total_timestamps": 315648,
               "regularity_score": 100.0,
@@ -8553,7 +9351,7 @@
               "multi_entity": true
             },
             "recommendations": [],
-            "overall_score": 101,
+            "overall_score": 100,
             "rating": "excellent",
             "rating_description": "Highly suitable for predictive analysis"
           }
@@ -8563,13 +9361,21 @@
     },
     "Smart Home Energy Consumption and Weather Data": {
       "name": "Smart Home Energy Consumption and Weather Data",
-      "path": "data\\Smart Home Energy Consumption and Weather Data",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\Smart Home Energy Consumption and Weather Data",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 1,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 1,
       "files": {
         "Smart Home Dataset.csv": {
           "filename": "Smart Home Dataset.csv",
-          "filepath": "data\\Smart Home Energy Consumption and Weather Data\\Smart Home Dataset.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Smart Home Energy Consumption and Weather Data\\Smart Home Dataset.csv",
           "total_rows": 503911,
           "total_columns": 32,
           "columns": [
@@ -9119,13 +9925,21 @@
     },
     "smart-meter-electricity-consumption-dataset": {
       "name": "smart-meter-electricity-consumption-dataset",
-      "path": "data\\smart-meter-electricity-consumption-dataset",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\smart-meter-electricity-consumption-dataset",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 1,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 1,
       "files": {
         "smart_meter_data.csv": {
           "filename": "smart_meter_data.csv",
-          "filepath": "data\\smart-meter-electricity-consumption-dataset\\smart_meter_data.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\smart-meter-electricity-consumption-dataset\\smart_meter_data.csv",
           "total_rows": 5000,
           "total_columns": 7,
           "columns": [
@@ -9237,8 +10051,8 @@
             "Timestamp": {
               "median_interval": "30 minutes",
               "median_interval_seconds": 1800.0,
-              "min_date": "2024-01-01 00:00:00",
-              "max_date": "2024-04-14 03:30:00",
+              "min_date": "2024-01-01 00:00:00+00:00",
+              "max_date": "2024-04-14 03:30:00+00:00",
               "date_range_days": 104,
               "total_timestamps": 5000,
               "regularity_score": 100.0,
@@ -9290,13 +10104,21 @@
     },
     "UNICON Energy Consumption Dataset": {
       "name": "UNICON Energy Consumption Dataset",
-      "path": "data\\UNICON Energy Consumption Dataset",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 11,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 11,
       "files": {
         "building_consumption.csv": {
           "filename": "building_consumption.csv",
-          "filepath": "data\\UNICON Energy Consumption Dataset\\building_consumption.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset\\building_consumption.csv",
           "total_rows": 8095524,
           "total_columns": 4,
           "columns": [
@@ -9365,8 +10187,8 @@
             "timestamp": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2018-01-01 00:15:00",
-              "max_date": "2022-04-30 23:45:00",
+              "min_date": "2018-01-01 00:15:00+00:00",
+              "max_date": "2022-04-30 23:45:00+00:00",
               "date_range_days": 1580,
               "total_timestamps": 8095524,
               "regularity_score": 0,
@@ -9413,7 +10235,7 @@
         },
         "building_meta.csv": {
           "filename": "building_meta.csv",
-          "filepath": "data\\UNICON Energy Consumption Dataset\\building_meta.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset\\building_meta.csv",
           "total_rows": 64,
           "total_columns": 7,
           "columns": [
@@ -9575,7 +10397,7 @@
         },
         "building_submeter_consumption.csv": {
           "filename": "building_submeter_consumption.csv",
-          "filepath": "data\\UNICON Energy Consumption Dataset\\building_submeter_consumption.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset\\building_submeter_consumption.csv",
           "total_rows": 1665162,
           "total_columns": 9,
           "columns": [
@@ -9719,8 +10541,8 @@
             "timestamp": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2019-08-15 13:50:00+10:00",
-              "max_date": "2022-07-13 08:55:00+10:00",
+              "min_date": "2019-08-15 03:50:00+00:00",
+              "max_date": "2022-07-12 22:55:00+00:00",
               "date_range_days": 1062,
               "total_timestamps": 1665162,
               "regularity_score": 0,
@@ -9771,7 +10593,7 @@
         },
         "calender.csv": {
           "filename": "calender.csv",
-          "filepath": "data\\UNICON Energy Consumption Dataset\\calender.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset\\calender.csv",
           "total_rows": 2312,
           "total_columns": 4,
           "columns": [
@@ -9840,8 +10662,8 @@
             "date": {
               "median_interval": "1 days",
               "median_interval_seconds": 86400.0,
-              "min_date": "2016-01-01 00:00:00",
-              "max_date": "2022-04-30 00:00:00",
+              "min_date": "2016-01-01 00:00:00+00:00",
+              "max_date": "2022-04-30 00:00:00+00:00",
               "date_range_days": 2311,
               "total_timestamps": 2312,
               "regularity_score": 100.0,
@@ -9885,7 +10707,7 @@
         },
         "campus_meta.csv": {
           "filename": "campus_meta.csv",
-          "filepath": "data\\UNICON Energy Consumption Dataset\\campus_meta.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset\\campus_meta.csv",
           "total_rows": 5,
           "total_columns": 3,
           "columns": [
@@ -9978,7 +10800,7 @@
         },
         "events.csv": {
           "filename": "events.csv",
-          "filepath": "data\\UNICON Energy Consumption Dataset\\events.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset\\events.csv",
           "total_rows": 106,
           "total_columns": 4,
           "columns": [
@@ -10054,8 +10876,8 @@
             "date": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2019-04-23 00:00:00",
-              "max_date": "2021-12-01 00:00:00",
+              "min_date": "2019-04-23 00:00:00+00:00",
+              "max_date": "2021-12-01 00:00:00+00:00",
               "date_range_days": 953,
               "total_timestamps": 106,
               "regularity_score": 0,
@@ -10107,7 +10929,7 @@
         },
         "gas_consumption.csv": {
           "filename": "gas_consumption.csv",
-          "filepath": "data\\UNICON Energy Consumption Dataset\\gas_consumption.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset\\gas_consumption.csv",
           "total_rows": 27164,
           "total_columns": 3,
           "columns": [
@@ -10161,8 +10983,8 @@
             "timestamp": {
               "median_interval": "1 hours",
               "median_interval_seconds": 3600.0,
-              "min_date": "2018-05-01 06:00:00",
-              "max_date": "2021-12-29 06:00:00",
+              "min_date": "2018-05-01 06:00:00+00:00",
+              "max_date": "2021-12-29 06:00:00+00:00",
               "date_range_days": 1338,
               "total_timestamps": 27164,
               "regularity_score": 0,
@@ -10208,7 +11030,7 @@
         },
         "nmi_consumption.csv": {
           "filename": "nmi_consumption.csv",
-          "filepath": "data\\UNICON Energy Consumption Dataset\\nmi_consumption.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset\\nmi_consumption.csv",
           "total_rows": 3507076,
           "total_columns": 6,
           "columns": [
@@ -10307,8 +11129,8 @@
             "timestamp": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2015-01-01 00:00:00",
-              "max_date": "2022-04-30 00:00:00",
+              "min_date": "2015-01-01 00:00:00+00:00",
+              "max_date": "2022-04-30 00:00:00+00:00",
               "date_range_days": 2676,
               "total_timestamps": 3507076,
               "regularity_score": 0,
@@ -10358,7 +11180,7 @@
         },
         "nmi_meta.csv": {
           "filename": "nmi_meta.csv",
-          "filepath": "data\\UNICON Energy Consumption Dataset\\nmi_meta.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset\\nmi_meta.csv",
           "total_rows": 14,
           "total_columns": 3,
           "columns": [
@@ -10448,7 +11270,7 @@
         },
         "water_consumption.csv": {
           "filename": "water_consumption.csv",
-          "filepath": "data\\UNICON Energy Consumption Dataset\\water_consumption.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset\\water_consumption.csv",
           "total_rows": 245040,
           "total_columns": 4,
           "columns": [
@@ -10517,8 +11339,8 @@
             "timestamp": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2021-01-10 00:00:00",
-              "max_date": "2022-12-03 23:45:00",
+              "min_date": "2021-01-10 00:00:00+00:00",
+              "max_date": "2022-12-03 23:45:00+00:00",
               "date_range_days": 692,
               "total_timestamps": 245040,
               "regularity_score": 0,
@@ -10566,7 +11388,7 @@
         },
         "weather_data.csv": {
           "filename": "weather_data.csv",
-          "filepath": "data\\UNICON Energy Consumption Dataset\\weather_data.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\UNICON Energy Consumption Dataset\\weather_data.csv",
           "total_rows": 7396520,
           "total_columns": 8,
           "columns": [
@@ -10695,8 +11517,8 @@
             "timestamp": {
               "median_interval": "0 seconds",
               "median_interval_seconds": 0.0,
-              "min_date": "2018-01-01 00:00:00",
-              "max_date": "2022-04-30 23:30:00",
+              "min_date": "2018-01-01 00:00:00+00:00",
+              "max_date": "2022-04-30 23:30:00+00:00",
               "date_range_days": 1580,
               "total_timestamps": 7396520,
               "regularity_score": 0,
@@ -10751,13 +11573,21 @@
     },
     "Weather-Based Smart Home Energy Usage Dataset": {
       "name": "Weather-Based Smart Home Energy Usage Dataset",
-      "path": "data\\Weather-Based Smart Home Energy Usage Dataset",
+      "path": "c:\\Users\\mnis\\Desktop\\DP\\data\\Weather-Based Smart Home Energy Usage Dataset",
       "type": "folder",
+      "structure": {
+        "type": "flat",
+        "root_csv_count": 1,
+        "root_xlsx_count": 0,
+        "subdirectories": 0,
+        "subdir_patterns": {},
+        "categories": {}
+      },
       "files_count": 1,
       "files": {
         "smart_home_energy_consumption_dataset_348_Days.csv": {
           "filename": "smart_home_energy_consumption_dataset_348_Days.csv",
-          "filepath": "data\\Weather-Based Smart Home Energy Usage Dataset\\smart_home_energy_consumption_dataset_348_Days.csv",
+          "filepath": "c:\\Users\\mnis\\Desktop\\DP\\data\\Weather-Based Smart Home Energy Usage Dataset\\smart_home_energy_consumption_dataset_348_Days.csv",
           "total_rows": 8352,
           "total_columns": 30,
           "columns": [
@@ -11216,8 +12046,8 @@
             "Datetime": {
               "median_interval": "1 hours",
               "median_interval_seconds": 3600.0,
-              "min_date": "2024-01-01 00:00:00",
-              "max_date": "2024-12-13 23:00:00",
+              "min_date": "2024-01-01 00:00:00+00:00",
+              "max_date": "2024-12-13 23:00:00+00:00",
               "date_range_days": 347,
               "total_timestamps": 8352,
               "regularity_score": 100.0,
