@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-12-15T01:28:00.548144",
+  "generated_at": "2025-12-15T01:32:18.199949",
   "datasets": {
     "8 years of hourly heating and electricity consumption data- a residential building": {
       "name": "8 years of hourly heating and electricity consumption data- a residential building",
@@ -446,8 +446,8 @@
                 "mean": 20.34181753568514,
                 "std": 49.44931409403338,
                 "median": 0.0,
-                "outliers_count": 13305,
-                "outliers_percentage": 15.73
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               },
               "v_blue": {
                 "dtype": "float64",
@@ -460,8 +460,8 @@
                 "mean": 22.97831248004352,
                 "std": 56.48129826233821,
                 "median": 0.0,
-                "outliers_count": 13036,
-                "outliers_percentage": 15.42
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               },
               "v_yellow": {
                 "dtype": "float64",
@@ -474,8 +474,8 @@
                 "mean": 20.07932937948651,
                 "std": 57.04965234248555,
                 "median": 0.0,
-                "outliers_count": 10359,
-                "outliers_percentage": 12.25
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               },
               "i_red": {
                 "dtype": "float64",
@@ -488,8 +488,8 @@
                 "mean": 0.5770151255336509,
                 "std": 1.8828399051758813,
                 "median": 0.0,
-                "outliers_count": 11647,
-                "outliers_percentage": 13.77
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               },
               "i_blue": {
                 "dtype": "float64",
@@ -502,8 +502,8 @@
                 "mean": 0.9253898224908054,
                 "std": 2.859360215257614,
                 "median": 0.0,
-                "outliers_count": 12088,
-                "outliers_percentage": 14.3
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               },
               "i_yellow": {
                 "dtype": "float64",
@@ -516,8 +516,8 @@
                 "mean": 0.6039498101917005,
                 "std": 2.1061707156286213,
                 "median": 0.0,
-                "outliers_count": 9235,
-                "outliers_percentage": 10.92
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               },
               "pf_red": {
                 "dtype": "float64",
@@ -530,8 +530,8 @@
                 "mean": 0.09870085975472745,
                 "std": 0.25630790292904637,
                 "median": 0.0,
-                "outliers_count": 11647,
-                "outliers_percentage": 13.77
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               },
               "pf_blue": {
                 "dtype": "float64",
@@ -544,8 +544,8 @@
                 "mean": 0.09886420132688419,
                 "std": 0.2557025736359283,
                 "median": 0.0,
-                "outliers_count": 12088,
-                "outliers_percentage": 14.3
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               },
               "pf_yellow": {
                 "dtype": "float64",
@@ -558,8 +558,8 @@
                 "mean": 0.0828216393287527,
                 "std": 0.24372327736084998,
                 "median": 0.0,
-                "outliers_count": 9235,
-                "outliers_percentage": 10.92
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               },
               "kWh_red": {
                 "dtype": "float64",
@@ -572,8 +572,8 @@
                 "mean": 0.00505483005047911,
                 "std": 0.019607520858808614,
                 "median": 0.0,
-                "outliers_count": 11646,
-                "outliers_percentage": 13.77
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               },
               "kWh_blue": {
                 "dtype": "float64",
@@ -586,8 +586,8 @@
                 "mean": 0.008812033189749765,
                 "std": 0.030470480777157315,
                 "median": 0.0,
-                "outliers_count": 12087,
-                "outliers_percentage": 14.29
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               },
               "kWh_yellow": {
                 "dtype": "float64",
@@ -600,8 +600,8 @@
                 "mean": 0.0066963206006958416,
                 "std": 0.023607709685429388,
                 "median": 0.0,
-                "outliers_count": 9235,
-                "outliers_percentage": 10.92
+                "outliers_count": 0,
+                "outliers_percentage": 0.0
               }
             },
             "datetime_columns": [
@@ -1396,8 +1396,8 @@
               "mean": 6.654219663114472,
               "std": 39.150778384323765,
               "median": 0.0,
-              "outliers_count": 14136,
-              "outliers_percentage": 5.06
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "pump_storage_pumping": {
               "dtype": "int64",
@@ -1438,8 +1438,8 @@
               "mean": 53.852139910622206,
               "std": 353.72256537237826,
               "median": 0.0,
-              "outliers_count": 70924,
-              "outliers_percentage": 25.4
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "britned_flow": {
               "dtype": "int64",
@@ -1578,8 +1578,8 @@
               "mean": 0.022516328635269853,
               "std": 0.1483557292195338,
               "median": 0.0,
-              "outliers_count": 6288,
-              "outliers_percentage": 2.25
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             }
           },
           "datetime_columns": [
@@ -1808,8 +1808,8 @@
               "mean": 6.6684164416614005,
               "std": 39.19764956710971,
               "median": 0.0,
-              "outliers_count": 14107,
-              "outliers_percentage": 5.07
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "pump_storage_pumping": {
               "dtype": "int64",
@@ -1850,8 +1850,8 @@
               "mean": 53.998768455219164,
               "std": 354.17947490916356,
               "median": 0.0,
-              "outliers_count": 70916,
-              "outliers_percentage": 25.46
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "britned_flow": {
               "dtype": "int64",
@@ -1920,8 +1920,8 @@
               "mean": 0.022404779686333084,
               "std": 0.14799623027677697,
               "median": 0.0,
-              "outliers_count": 6240,
-              "outliers_percentage": 2.24
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             }
           },
           "datetime_columns": [
@@ -2153,8 +2153,8 @@
               "mean": 3.005536529680365,
               "std": 16.161018481178782,
               "median": 0.0,
-              "outliers_count": 967,
-              "outliers_percentage": 5.52
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -2466,8 +2466,8 @@
               "mean": 1.7234018264840183,
               "std": 15.45088021710504,
               "median": 0.0,
-              "outliers_count": 619,
-              "outliers_percentage": 3.53
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -2779,8 +2779,8 @@
               "mean": 7.278595890410959,
               "std": 40.25358085848656,
               "median": 0.0,
-              "outliers_count": 1279,
-              "outliers_percentage": 7.3
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -3092,8 +3092,8 @@
               "mean": 6.546163479052823,
               "std": 34.62013407963556,
               "median": 0.0,
-              "outliers_count": 1219,
-              "outliers_percentage": 6.94
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -3176,8 +3176,8 @@
               "mean": -11.811873861566484,
               "std": 71.47865335082295,
               "median": 0.0,
-              "outliers_count": 1769,
-              "outliers_percentage": 10.07
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "NEMO_FLOW": {
               "dtype": "int64",
@@ -3405,8 +3405,8 @@
               "mean": 10.915125570776256,
               "std": 43.80589302998971,
               "median": 0.0,
-              "outliers_count": 1636,
-              "outliers_percentage": 9.34
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -3718,8 +3718,8 @@
               "mean": 9.23304794520548,
               "std": 42.34418691229167,
               "median": 0.0,
-              "outliers_count": 1217,
-              "outliers_percentage": 6.95
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -4031,8 +4031,8 @@
               "mean": 10.912214611872146,
               "std": 49.072079739839566,
               "median": 0.0,
-              "outliers_count": 1319,
-              "outliers_percentage": 7.53
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -4344,8 +4344,8 @@
               "mean": 12.795309653916211,
               "std": 53.945892078369845,
               "median": 0.0,
-              "outliers_count": 1484,
-              "outliers_percentage": 8.45
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -4657,8 +4657,8 @@
               "mean": 16.81255707762557,
               "std": 63.172880706464554,
               "median": 0.0,
-              "outliers_count": 1782,
-              "outliers_percentage": 10.17
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -4956,8 +4956,8 @@
               "mean": 13023.317351598174,
               "std": 55.48262400601743,
               "median": 13052.0,
-              "outliers_count": 3695,
-              "outliers_percentage": 21.09
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "NON_BM_STOR": {
               "dtype": "int64",
@@ -4970,8 +4970,8 @@
               "mean": 20.836301369863012,
               "std": 77.49092867678058,
               "median": 0.0,
-              "outliers_count": 1881,
-              "outliers_percentage": 10.74
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -5271,8 +5271,8 @@
               "mean": 13076.624657534247,
               "std": 9.117093651589379,
               "median": 13080.0,
-              "outliers_count": 2112,
-              "outliers_percentage": 12.05
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "NON_BM_STOR": {
               "dtype": "int64",
@@ -5285,8 +5285,8 @@
               "mean": 3.441552511415525,
               "std": 29.342254037677588,
               "median": 0.0,
-              "outliers_count": 384,
-              "outliers_percentage": 2.19
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -5586,8 +5586,8 @@
               "mean": 6515.479849726776,
               "std": 27.33749198388899,
               "median": 6527.0,
-              "outliers_count": 5038,
-              "outliers_percentage": 28.68
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "EMBEDDED_SOLAR_GENERATION": {
               "dtype": "int64",
@@ -5628,8 +5628,8 @@
               "mean": 2.378415300546448,
               "std": 23.76621909073331,
               "median": 0.0,
-              "outliers_count": 303,
-              "outliers_percentage": 1.72
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -5670,8 +5670,8 @@
               "mean": 1.1010359744990892,
               "std": 44.814547787002994,
               "median": 0.0,
-              "outliers_count": 2079,
-              "outliers_percentage": 11.83
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "BRITNED_FLOW": {
               "dtype": "int64",
@@ -5971,8 +5971,8 @@
               "mean": 0.1160958904109589,
               "std": 5.061468506011885,
               "median": 0.0,
-              "outliers_count": 35,
-              "outliers_percentage": 0.2
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "PUMP_STORAGE_PUMPING": {
               "dtype": "int64",
@@ -6097,8 +6097,8 @@
               "mean": 0.8845319634703196,
               "std": 40.46954658106578,
               "median": 0.0,
-              "outliers_count": 48,
-              "outliers_percentage": 0.27
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             }
           },
           "datetime_columns": [
@@ -6272,8 +6272,8 @@
               "mean": 6542.658561643836,
               "std": 6.3578320528471925,
               "median": 6545.0,
-              "outliers_count": 2879,
-              "outliers_percentage": 16.43
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "embedded_solar_generation": {
               "dtype": "int64",
@@ -6314,8 +6314,8 @@
               "mean": 0.012614155251141552,
               "std": 0.6095034923634466,
               "median": 0.0,
-              "outliers_count": 11,
-              "outliers_percentage": 0.06
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "pump_storage_pumping": {
               "dtype": "int64",
@@ -6813,8 +6813,8 @@
               "mean": 5.664783105022831,
               "std": 91.43600602151893,
               "median": 0.0,
-              "outliers_count": 252,
-              "outliers_percentage": 1.44
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             }
           },
           "datetime_columns": [
@@ -8890,8 +8890,8 @@
               "mean": 0.15394775164973598,
               "std": 0.5985804650002766,
               "median": 0.0,
-              "outliers_count": 2819,
-              "outliers_percentage": 10.71
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "wind_dir": {
               "dtype": "float64",
@@ -9838,8 +9838,8 @@
               "mean": 0.002598072671707249,
               "std": 0.011256805567147454,
               "median": 0.0,
-              "outliers_count": 87303,
-              "outliers_percentage": 17.33
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "dewPoint": {
               "dtype": "float64",
@@ -9866,8 +9866,8 @@
               "mean": 0.05645313647278283,
               "std": 0.16583623676315773,
               "median": 0.0,
-              "outliers_count": 87303,
-              "outliers_percentage": 17.33
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             }
           },
           "potential_metadata_columns": [
@@ -10140,8 +10140,8 @@
               "mean": 1.2024264272454754,
               "std": 0.5065307781350296,
               "median": 1.0,
-              "outliers_count": 1253711,
-              "outliers_percentage": 15.49
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "meter_id": {
               "dtype": "int64",
@@ -10260,8 +10260,8 @@
               "mean": 1.234375,
               "std": 0.5268109356351308,
               "median": 1.0,
-              "outliers_count": 12,
-              "outliers_percentage": 18.75
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "id": {
               "dtype": "int64",
@@ -10623,8 +10623,8 @@
               "mean": 0.03330449826989619,
               "std": 0.17946932884775404,
               "median": 0.0,
-              "outliers_count": 77,
-              "outliers_percentage": 3.33
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "is_semester": {
               "dtype": "int64",
@@ -10637,8 +10637,8 @@
               "mean": 0.12024221453287197,
               "std": 0.32531492205462986,
               "median": 0.0,
-              "outliers_count": 278,
-              "outliers_percentage": 12.02
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "is_exam": {
               "dtype": "int64",
@@ -10651,8 +10651,8 @@
               "mean": 0.050173010380622836,
               "std": 0.21834903399664987,
               "median": 0.0,
-              "outliers_count": 116,
-              "outliers_percentage": 5.02
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             }
           },
           "datetime_columns": [
@@ -10950,8 +10950,8 @@
               "mean": 1.298409659843911,
               "std": 0.7125936346050085,
               "median": 1.0,
-              "outliers_count": 4053,
-              "outliers_percentage": 14.92
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "timestamp": {
               "dtype": "object",
@@ -11881,8 +11881,8 @@
               "mean": 0.40833333333333344,
               "std": 0.03996765546557981,
               "median": 0.4,
-              "outliers_count": 348,
-              "outliers_percentage": 4.17
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "Home_Office": {
               "dtype": "float64",
@@ -11937,8 +11937,8 @@
               "mean": 0.10416666666666669,
               "std": 0.01382009733715021,
               "median": 0.1,
-              "outliers_count": 696,
-              "outliers_percentage": 8.33
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "Kitchen_12": {
               "dtype": "float64",
@@ -11951,8 +11951,8 @@
               "mean": 1.025,
               "std": 0.06614774288934226,
               "median": 1.0,
-              "outliers_count": 1044,
-              "outliers_percentage": 12.5
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "Kitchen_14": {
               "dtype": "float64",
@@ -11965,8 +11965,8 @@
               "mean": 0.8125000000000001,
               "std": 0.04146029201145043,
               "median": 0.8,
-              "outliers_count": 696,
-              "outliers_percentage": 8.33
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "Kitchen_38": {
               "dtype": "float64",
@@ -11979,8 +11979,8 @@
               "mean": 1.2249999999999999,
               "std": 0.06614774288933899,
               "median": 1.2,
-              "outliers_count": 1044,
-              "outliers_percentage": 12.5
+              "outliers_count": 0,
+              "outliers_percentage": 0.0
             },
             "Barn": {
               "dtype": "float64",
