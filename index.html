@@ -603,14 +603,45 @@
             color: #666;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            body { padding: 15px; }
-            header { margin: -15px -15px 20px -15px; padding: 20px; }
-            .summary-grid { grid-template-columns: repeat(2, 1fr); }
-            .score-bars { grid-template-columns: repeat(3, 1fr); }
-            .file-card-meta { display: none; }
+        /* Modal for image zoom */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: flex-start;
+            align-items: flex-start;
+            overflow: auto;
+            cursor: pointer;
         }
+        .modal img {
+            width: 85%;
+            height: auto;
+            cursor: default;
+        }
+            /* Section transition (datasets <-> models) */
+            .section-container {
+                transition: opacity 400ms ease, transform 400ms ease, visibility 400ms;
+            }
+            .visible-section {
+                opacity: 1;
+                transform: translateY(0);
+                visibility: visible;
+                pointer-events: auto;
+                height: auto;
+            }
+            .hidden-section {
+                opacity: 0;
+                transform: translateY(8px);
+                visibility: hidden;
+                pointer-events: none;
+                height: 0;
+                overflow: hidden;
+            }
     </style>
 </head>
 <body>
@@ -643,11 +674,59 @@
         </div>
     </div>
 
-    <div class="summary-grid" id="summary-grid"></div>
+    <div class="summary-grid section-container visible-section" id="summary-grid"></div>
+    <!-- New quick access: Datasets & Models -->
+    <div style="display:flex;gap:12px;margin:18px 0;align-items:center;">
+        <button id="btn-show-datasets" class="section-toggle" style="background:#fff;border:1px solid #ddd;padding:10px 14px;border-radius:8px;cursor:pointer;">📚 Datasets</button>
+        <button id="btn-show-models" class="section-toggle" style="background:#fff;border:1px solid #ddd;padding:10px 14px;border-radius:8px;cursor:pointer;">🧠 Models</button>
+    </div>
 
-    <div id="datasets-container">
+    <div id="datasets-container" class="section-container visible-section">
         <div class="loading">Loading datasets...</div>
     </div>
+
+    <!-- Models results rendered from CSV -->
+    <section id="models-section" class="section-container hidden-section" style="margin-top:30px;">
+        <div style="background:#fff;border:1px solid #ddd;padding:18px;border-radius:8px;">
+            <h2 style="margin-bottom:8px;">Models — Results & Ranking</h2>
+            <p style="color:#555;margin-bottom:12px;">Interactive model comparison rendered from <code>model_comparison.csv</code>.</p>
+
+            <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
+                <div style="flex:1;min-width:320px;">
+                    <h4 style="margin:0 0 8px 0">Metric Charts</h4>
+                    <div style="background:#fff;border:1px solid #ddd;padding:12px;border-radius:6px;margin-bottom:12px;">
+                        <canvas id="chart-rmse" style="max-width:100%;height:260px;"></canvas>
+                    </div>
+                    <div style="background:#fff;border:1px solid #ddd;padding:12px;border-radius:6px;margin-bottom:12px;">
+                        <canvas id="chart-mae" style="max-width:100%;height:260px;"></canvas>
+                    </div>
+                    <div style="background:#fff;border:1px solid #ddd;padding:12px;border-radius:6px;margin-bottom:12px;">
+                        <canvas id="chart-mape" style="max-width:100%;height:260px;"></canvas>
+                    </div>
+                </div>
+
+                <div style="flex:1;min-width:280px;">
+                    <h4 style="margin:0 0 8px 0">Best Models Summary</h4>
+                    <div id="best-models-box" style="background:#f8f9fa;border:1px solid #eee;padding:12px;border-radius:6px;color:#222;min-height:120px;"></div>
+                </div>
+            </div>
+
+            <div style="margin-top:18px;">
+                <h4 style="margin:0 0 8px 0">Prediction Visualizations</h4>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                    <div style="background:#fff;border:1px solid #ddd;padding:12px;border-radius:6px;flex:1;min-width:300px;">
+                        <img src="predictions_day.png" alt="Day-ahead Predictions" style="max-width:100%;height:auto;">
+                    </div>
+                    <div style="background:#fff;border:1px solid #ddd;padding:12px;border-radius:6px;flex:1;min-width:300px;">
+                        <img src="predictions_week.png" alt="Week-ahead Predictions" style="max-width:100%;height:auto;">
+                    </div>
+                    <div style="background:#fff;border:1px solid #ddd;padding:12px;border-radius:6px;flex:1;min-width:300px;">
+                        <img src="predictions_month.png" alt="Month-ahead Predictions" style="max-width:100%;height:auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
         let datasetsData = {};
@@ -1219,5 +1298,147 @@
 
         loadData();
     </script>
+
+    <!-- Load dependencies and render models from CSV -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        // Toggle behavior between datasets and models with smooth transition
+        (function(){
+            const btnShowModels = document.getElementById('btn-show-models');
+            const btnShowDatasets = document.getElementById('btn-show-datasets');
+            const ds = document.getElementById('datasets-container');
+            const summary = document.getElementById('summary-grid');
+            const models = document.getElementById('models-section');
+
+            function showModels() {
+                ds.classList.remove('visible-section'); ds.classList.add('hidden-section');
+                summary.classList.remove('visible-section'); summary.classList.add('hidden-section');
+                models.classList.remove('hidden-section'); models.classList.add('visible-section');
+                if (!window._modelsRendered) { renderModelsFromCSV(); window._modelsRendered = true; }
+            }
+
+            function showDatasets() {
+                models.classList.remove('visible-section'); models.classList.add('hidden-section');
+                ds.classList.remove('hidden-section'); ds.classList.add('visible-section');
+                summary.classList.remove('hidden-section'); summary.classList.add('visible-section');
+            }
+
+            btnShowModels.addEventListener('click', showModels);
+            btnShowDatasets.addEventListener('click', showDatasets);
+        })();
+
+        async function renderModelsFromCSV() {
+            try {
+                console.log('Attempting to fetch model_comparison.csv...');
+                const resp = await fetch('model_comparison.csv');
+                console.log('Fetch response status:', resp.status);
+                if (!resp.ok) {
+                    throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
+                }
+                const txt = await resp.text();
+                console.log('CSV text length:', txt.length);
+                const parsed = Papa.parse(txt, {header:true, dynamicTyping:true}).data.filter(row => row.Horizon && row.Horizon.trim() !== '');
+                console.log('Filtered parsed data rows:', parsed.length);
+
+                // parsed is array of rows with Horizon and columns like ARIMA_RMSE
+                const horizons = parsed.map(r => r.Horizon);
+                const models = ['ARIMA','SVM','CNN','LightGBM','LSTM','TCN'];
+                // Build datasets for each metric
+                const metrics = ['RMSE','MAE','MAPE'];
+                const chartData = {};
+                metrics.forEach(m => { chartData[m] = {} ; models.forEach(md => chartData[m][md]=[]); });
+
+                parsed.forEach(row => {
+                    models.forEach(md => {
+                        metrics.forEach(m => {
+                            const key = `${md}_${m}`;
+                            const val = row.hasOwnProperty(key) ? row[key] : NaN;
+                            chartData[m][md].push(isFinite(val) ? val : null);
+                        });
+                    });
+                });
+
+                // Create charts (grouped by horizon, datasets = models)
+                const colors = {
+                    'ARIMA':'#1f77b4','SVM':'#ff7f0e','CNN':'#2ca02c','LightGBM':'#d62728','LSTM':'#9467bd','TCN':'#8c564b'
+                };
+
+                function makeChart(canvasId, metric) {
+                    const ctx = document.getElementById(canvasId).getContext('2d');
+                    const datasets = models.map(md => ({
+                        label: md,
+                        data: chartData[metric][md],
+                        backgroundColor: colors[md] || '#999'
+                    }));
+                    return new Chart(ctx, {
+                        type: 'bar',
+                        data: { labels: horizons.map(h=>h.toUpperCase()), datasets },
+                        options: {
+                            responsive:true,
+                            plugins: { 
+                                legend: { position:'top' },
+                                title: { display: true, text: metric }
+                            },
+                            scales: { x: { stacked:false }, y: { beginAtZero:true } }
+                        }
+                    });
+                }
+
+                // Create three charts
+                makeChart('chart-rmse','RMSE');
+                makeChart('chart-mae','MAE');
+                makeChart('chart-mape','MAPE');
+
+                // Compute best models per horizon and populate summary box
+                const bestBox = document.getElementById('best-models-box');
+                bestBox.innerHTML = '';
+                parsed.forEach(row => {
+                    const horizon = row.Horizon;
+                    // For each metric find min model
+                    const winners = {};
+                    metrics.forEach(m => {
+                        let bestModel = null, bestVal = Infinity;
+                        models.forEach(md => {
+                            const v = row[`${md}_${m}`];
+                            if (isFinite(v) && v < bestVal) { bestVal = v; bestModel = md; }
+                        });
+                        winners[m] = {model: bestModel, value: bestVal};
+                    });
+                    const entry = document.createElement('div');
+                    entry.style.marginBottom = '8px';
+                    entry.innerHTML = `<strong>${horizon.toUpperCase()}</strong><br/>RMSE: ${winners.RMSE.model} (${winners.RMSE.value.toFixed(4)})<br/>MAE: ${winners.MAE.model} (${winners.MAE.value.toFixed(4)})<br/>MAPE: ${winners.MAPE.model} (${winners.MAPE.value.toFixed(4)})`;
+                    bestBox.appendChild(entry);
+                });
+
+            } catch (e) {
+                console.error('Error rendering models from CSV:', e);
+                document.getElementById('best-models-box').textContent = 'Error loading model_comparison.csv';
+            }
+        }
+
+        // Image zoom modal
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('#models-section img').forEach(img => {
+                img.style.cursor = 'pointer';
+                img.addEventListener('click', () => {
+                    const modal = document.getElementById('image-modal');
+                    const modalImg = modal.querySelector('img');
+                    modalImg.src = img.src;
+                    modalImg.alt = img.alt;
+                    modal.style.display = 'flex';
+                });
+            });
+
+            document.getElementById('image-modal').addEventListener('click', () => {
+                document.getElementById('image-modal').style.display = 'none';
+            });
+        });
+    </script>
+
+    <!-- Modal for image zoom -->
+    <div id="image-modal" class="modal">
+        <img src="" alt="">
+    </div>
 </body>
 </html>

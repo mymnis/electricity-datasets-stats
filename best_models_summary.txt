@@ -1,0 +1,21 @@
+Best Performing Models Summary
+========================================
+
+DAY Horizon:
+--------------------
+  RMSE: LightGBM (54.1521)
+  MAE: LightGBM (41.5915)
+  MAPE: LightGBM (0.1820)
+
+WEEK Horizon:
+--------------------
+  RMSE: LightGBM (49.1478)
+  MAE: LightGBM (36.6459)
+  MAPE: LightGBM (0.1539)
+
+MONTH Horizon:
+--------------------
+  RMSE: LightGBM (52.8580)
+  MAE: LightGBM (38.5537)
+  MAPE: LightGBM (0.1568)
+
