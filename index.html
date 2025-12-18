@@ -715,13 +715,13 @@
                 <h4 style="margin:0 0 8px 0">Prediction Visualizations</h4>
                 <div style="display:flex;gap:12px;flex-wrap:wrap;">
                     <div style="background:#fff;border:1px solid #ddd;padding:12px;border-radius:6px;flex:1;min-width:300px;">
-                        <img src="predictions_day.png" alt="Day-ahead Predictions" style="max-width:100%;height:auto;">
+                        <img src="comparison/predictions_day.png" alt="Day-ahead Predictions" style="max-width:100%;height:auto;">
                     </div>
                     <div style="background:#fff;border:1px solid #ddd;padding:12px;border-radius:6px;flex:1;min-width:300px;">
-                        <img src="predictions_week.png" alt="Week-ahead Predictions" style="max-width:100%;height:auto;">
+                        <img src="comparison/predictions_week.png" alt="Week-ahead Predictions" style="max-width:100%;height:auto;">
                     </div>
                     <div style="background:#fff;border:1px solid #ddd;padding:12px;border-radius:6px;flex:1;min-width:300px;">
-                        <img src="predictions_month.png" alt="Month-ahead Predictions" style="max-width:100%;height:auto;">
+                        <img src="comparison/predictions_month.png" alt="Month-ahead Predictions" style="max-width:100%;height:auto;">
                     </div>
                 </div>
             </div>
@@ -1330,8 +1330,8 @@
 
         async function renderModelsFromCSV() {
             try {
-                console.log('Attempting to fetch model_comparison.csv...');
-                const resp = await fetch('model_comparison.csv');
+                console.log('Attempting to fetch comparison/model_comparison.csv...');
+                const resp = await fetch('comparison/model_comparison.csv');
                 console.log('Fetch response status:', resp.status);
                 if (!resp.ok) {
                     throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
